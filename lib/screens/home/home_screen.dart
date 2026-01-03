@@ -9,6 +9,7 @@ import '../counsellor/counsellor_list_screen.dart';
 import '../counsellor/support_requests_screen.dart';
 import '../counsellor/counsellor_dashboard_screen.dart';
 import '../counsellor/pending_requests_screen.dart';
+import '../counsellor/counsellor_messages_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -315,8 +316,10 @@ class HomeScreen extends StatelessWidget {
           subtitle: 'Chat with your clients',
           color: Colors.blue,
           onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Messaging coming soon')),
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const CounsellorMessagesScreen(),
+              ),
             );
           },
         ),
