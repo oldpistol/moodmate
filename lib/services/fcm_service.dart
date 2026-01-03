@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:developer' as developer;
 
 /// Service for managing Firebase Cloud Messaging (FCM) tokens and notifications
@@ -85,6 +86,14 @@ class FCMService {
   /// Initialize FCM for the current user
   /// This should be called after user login
   Future<void> initializeFCM() async {
+    // Skip FCM initialization on web platform
+    if (kIsWeb) {
+      developer.log(
+        'FCM notifications not fully supported on web, skipping initialization',
+      );
+      return;
+    }
+
     try {
       // Request permission
       final hasPermission = await requestPermission();
@@ -111,6 +120,12 @@ class FCMService {
 
   /// Remove FCM token from Firestore (call on logout)
   Future<void> removeToken() async {
+    // Skip on web platform
+    if (kIsWeb) {
+      developer.log('Skipping FCM token removal on web');
+      return;
+    }
+
     try {
       final user = _auth.currentUser;
       if (user == null) {
@@ -118,17 +133,41 @@ class FCMService {
         return;
       }
 
-      await _firestore.collection('users').doc(user.uid).update({
-        'fcmToken': FieldValue.delete(),
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
+      // Try to update Firestore with timeout
+      await _firestore
+          .collection('users')
+          .doc(user.uid)
+          .update({
+            'fcmToken': FieldValue.delete(),
+            'updatedAt': FieldValue.serverTimestamp(),
+          })
+          .timeout(
+            const Duration(seconds: 3),
+            onTimeout: () {
+              developer.log('Timeout updating Firestore, continuing anyway');
+            },
+          );
 
-      // Delete the FCM token from the device
-      await _firebaseMessaging.deleteToken();
+      // Try to delete the FCM token from the device (may not work on web)
+      try {
+        await _firebaseMessaging.deleteToken().timeout(
+          const Duration(seconds: 2),
+          onTimeout: () {
+            developer.log('Timeout deleting FCM token, continuing anyway');
+            return null;
+          },
+        );
+      } catch (e) {
+        developer.log(
+          'Error deleting FCM token (may not be supported on web): $e',
+        );
+        // Continue anyway, this is not critical
+      }
 
       developer.log('FCM token removed for user: ${user.uid}');
     } catch (e) {
       developer.log('Error removing FCM token: $e');
+      // Don't throw, allow sign out to continue
     }
   }
 

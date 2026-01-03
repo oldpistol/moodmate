@@ -58,8 +58,18 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> signOut() async {
-    // Remove FCM token before signing out
-    await _fcmService.removeToken();
+    try {
+      // Remove FCM token before signing out (with timeout)
+      await _fcmService.removeToken().timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          debugPrint('FCM token removal timed out, continuing with sign out');
+        },
+      );
+    } catch (e) {
+      debugPrint('Error removing FCM token: $e');
+      // Continue with sign out even if FCM removal fails
+    }
 
     await _authService.signOut();
     _firebaseUser = null;
