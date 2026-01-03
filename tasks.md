@@ -34,20 +34,20 @@ This document breaks down the use cases into actionable development tasks, organ
 - [x] Create user profile document in Firestore after successful registration
 - [x] Handle alternate flow: email already exists error
 
-### Task 1.2: User Login (UC-02)
+### Task 1.2: User Login (UC-02) ✅
 
 **Priority:** High  
 **Dependencies:** Task 1.1
 
-- [ ] Design and implement login UI
-- [ ] Implement Firebase Auth sign-in method
-- [ ] Handle authentication state changes
-- [ ] Implement session persistence (Firebase Auth automatic)
-- [ ] Create dashboard/home screen
-- [ ] Add "invalid credentials" error handling
-- [ ] Implement retry mechanism for failed login attempts
-- [ ] Fetch user role from Firestore after login
-- [ ] Add role-based access (User vs Counsellor)
+- [x] Design and implement login UI
+- [x] Implement Firebase Auth sign-in method
+- [x] Handle authentication state changes
+- [x] Implement session persistence (Firebase Auth automatic)
+- [x] Create dashboard/home screen
+- [x] Add "invalid credentials" error handling
+- [x] Implement retry mechanism for failed login attempts
+- [x] Fetch user role from Firestore after login
+- [x] Add role-based access (User vs Counsellor)
 
 ### Task 1.3: User Roles & Permissions
 
