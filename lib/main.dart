@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'providers/auth_provider.dart';
@@ -11,6 +12,22 @@ import 'screens/mood/mood_entry_screen.dart';
 import 'screens/mood/mood_entry_detail_screen.dart';
 import 'screens/mood/mood_history_screen.dart';
 import 'screens/mood/mood_trends_screen.dart';
+import 'dart:developer' as developer;
+
+/// Background message handler
+/// This must be a top-level function
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // Initialize Firebase if not already initialized
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  developer.log('Handling background message: ${message.messageId}');
+  developer.log('Message data: ${message.data}');
+
+  if (message.notification != null) {
+    developer.log('Background notification: ${message.notification!.title}');
+  }
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,11 +35,57 @@ void main() async {
   // Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  // Set up background message handler
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    _setupForegroundNotificationHandling();
+  }
+
+  void _setupForegroundNotificationHandling() {
+    // Handle foreground messages
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      developer.log('Received foreground message: ${message.messageId}');
+
+      if (message.notification != null) {
+        developer.log(
+          'Foreground notification: ${message.notification!.title}',
+        );
+        developer.log('Notification body: ${message.notification!.body}');
+
+        // Show a snackbar or dialog for foreground notifications
+        // You can customize this based on your app's needs
+      }
+    });
+
+    // Handle notification taps when app is in background
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      developer.log('Notification tapped: ${message.messageId}');
+      developer.log('Message data: ${message.data}');
+
+      // Navigate to relevant screen based on message data
+      if (message.data['type'] == 'new_message' &&
+          message.data['threadId'] != null) {
+        // Handle navigation to conversation screen
+        developer.log(
+          'Should navigate to conversation: ${message.data['threadId']}',
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

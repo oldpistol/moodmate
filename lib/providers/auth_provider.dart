@@ -2,9 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/user_model.dart';
 import '../services/auth_service.dart';
+import '../services/fcm_service.dart';
 
 class AuthProvider extends ChangeNotifier {
   final AuthService _authService = AuthService();
+  final FCMService _fcmService = FCMService();
 
   User? _firebaseUser;
   UserModel? _userModel;
@@ -28,6 +30,9 @@ class AuthProvider extends ChangeNotifier {
         // Fetch user profile from Firestore
         try {
           _userModel = await _authService.getUserProfile(user.uid);
+
+          // Initialize FCM for the logged-in user
+          await _fcmService.initializeFCM();
         } catch (e) {
           debugPrint('Error fetching user profile: $e');
           _userModel = null;
@@ -53,6 +58,9 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> signOut() async {
+    // Remove FCM token before signing out
+    await _fcmService.removeToken();
+
     await _authService.signOut();
     _firebaseUser = null;
     _userModel = null;

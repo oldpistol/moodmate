@@ -10,6 +10,7 @@ class UserModel {
   final DateTime createdAt;
   final DateTime updatedAt;
   final bool emailVerified;
+  final String? fcmToken;
 
   UserModel({
     required this.id,
@@ -19,6 +20,7 @@ class UserModel {
     required this.createdAt,
     required this.updatedAt,
     this.emailVerified = false,
+    this.fcmToken,
   });
 
   // Convert UserModel to Firestore document
@@ -30,6 +32,7 @@ class UserModel {
       'createdAt': Timestamp.fromDate(createdAt),
       'updatedAt': Timestamp.fromDate(updatedAt),
       'emailVerified': emailVerified,
+      'fcmToken': fcmToken,
     };
   }
 
@@ -46,6 +49,7 @@ class UserModel {
       createdAt: (data['createdAt'] as Timestamp).toDate(),
       updatedAt: (data['updatedAt'] as Timestamp).toDate(),
       emailVerified: data['emailVerified'] ?? false,
+      fcmToken: data['fcmToken'] as String?,
     );
   }
 
@@ -70,6 +74,7 @@ class UserModel {
     DateTime? createdAt,
     DateTime? updatedAt,
     bool? emailVerified,
+    String? fcmToken,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -79,6 +84,7 @@ class UserModel {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       emailVerified: emailVerified ?? this.emailVerified,
+      fcmToken: fcmToken ?? this.fcmToken,
     );
   }
 }
