@@ -100,22 +100,8 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
     Query<Map<String, dynamic>> query = _firestore
         .collection('mood_entries')
         .where('userId', isEqualTo: user.uid)
-        .orderBy('timestamp', descending: true);
-
-    // Apply date range filter
-    if (_filterOption == 'week') {
-      final weekAgo = DateTime.now().subtract(const Duration(days: 7));
-      query = query.where('timestamp', isGreaterThanOrEqualTo: Timestamp.fromDate(weekAgo));
-    } else if (_filterOption == 'month') {
-      final monthAgo = DateTime.now().subtract(const Duration(days: 30));
-      query = query.where('timestamp', isGreaterThanOrEqualTo: Timestamp.fromDate(monthAgo));
-    } else if (_filterOption == 'custom' && _selectedDateRange != null) {
-      query = query
-          .where('timestamp', isGreaterThanOrEqualTo: Timestamp.fromDate(_selectedDateRange!.start))
-          .where('timestamp', isLessThanOrEqualTo: Timestamp.fromDate(_selectedDateRange!.end.add(const Duration(days: 1))));
-    }
-
-    query = query.limit(_pageSize);
+        .orderBy('timestamp', descending: true)
+        .limit(_pageSize * 2); // Get more to filter client-side
 
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
       stream: query.snapshots(),
@@ -144,10 +130,34 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
 
         final docs = snapshot.data?.docs ?? [];
 
+        // Apply date range filter on client side
+        var filteredByDate = docs;
+        if (_filterOption == 'week') {
+          final weekAgo = DateTime.now().subtract(const Duration(days: 7));
+          filteredByDate = docs.where((doc) {
+            final timestamp = doc.data()['timestamp'] as Timestamp?;
+            return timestamp != null && timestamp.toDate().isAfter(weekAgo);
+          }).toList();
+        } else if (_filterOption == 'month') {
+          final monthAgo = DateTime.now().subtract(const Duration(days: 30));
+          filteredByDate = docs.where((doc) {
+            final timestamp = doc.data()['timestamp'] as Timestamp?;
+            return timestamp != null && timestamp.toDate().isAfter(monthAgo);
+          }).toList();
+        } else if (_filterOption == 'custom' && _selectedDateRange != null) {
+          filteredByDate = docs.where((doc) {
+            final timestamp = doc.data()['timestamp'] as Timestamp?;
+            if (timestamp == null) return false;
+            final date = timestamp.toDate();
+            return date.isAfter(_selectedDateRange!.start.subtract(const Duration(days: 1))) &&
+                date.isBefore(_selectedDateRange!.end.add(const Duration(days: 1)));
+          }).toList();
+        }
+
         // Filter by search query if present
         final filteredDocs = _searchQuery.isEmpty
-            ? docs
-            : docs.where((doc) {
+            ? filteredByDate
+            : filteredByDate.where((doc) {
                 final data = doc.data();
                 final text = data['text']?.toString().toLowerCase() ?? '';
                 final emotion = data['emotion']?.toString().toLowerCase() ?? '';
@@ -530,19 +540,6 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
           .collection('mood_entries')
           .where('userId', isEqualTo: user.uid)
           .orderBy('timestamp', descending: true);
-
-      // Apply date range filter
-      if (_filterOption == 'week') {
-        final weekAgo = DateTime.now().subtract(const Duration(days: 7));
-        query = query.where('timestamp', isGreaterThanOrEqualTo: Timestamp.fromDate(weekAgo));
-      } else if (_filterOption == 'month') {
-        final monthAgo = DateTime.now().subtract(const Duration(days: 30));
-        query = query.where('timestamp', isGreaterThanOrEqualTo: Timestamp.fromDate(monthAgo));
-      } else if (_filterOption == 'custom' && _selectedDateRange != null) {
-        query = query
-            .where('timestamp', isGreaterThanOrEqualTo: Timestamp.fromDate(_selectedDateRange!.start))
-            .where('timestamp', isLessThanOrEqualTo: Timestamp.fromDate(_selectedDateRange!.end.add(const Duration(days: 1))));
-      }
 
       if (_lastDocument != null) {
         query = query.startAfterDocument(_lastDocument!);

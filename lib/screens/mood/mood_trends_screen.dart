@@ -87,7 +87,6 @@ class _MoodTrendsScreenState extends State<MoodTrendsScreen> {
       stream: _firestore
           .collection('mood_entries')
           .where('userId', isEqualTo: user.uid)
-          .where('timestamp', isGreaterThanOrEqualTo: Timestamp.fromDate(startDate))
           .orderBy('timestamp', descending: false)
           .snapshots(),
       builder: (context, snapshot) {
@@ -100,8 +99,14 @@ class _MoodTrendsScreenState extends State<MoodTrendsScreen> {
         }
 
         final docs = snapshot.data?.docs ?? [];
+        
+        // Filter by date range on client side
+        final filteredDocs = docs.where((doc) {
+          final timestamp = doc.data()['timestamp'] as Timestamp?;
+          return timestamp != null && timestamp.toDate().isAfter(startDate);
+        }).toList();
 
-        if (docs.isEmpty) {
+        if (filteredDocs.isEmpty) {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -126,7 +131,7 @@ class _MoodTrendsScreenState extends State<MoodTrendsScreen> {
           );
         }
 
-        final entries = docs.map((doc) => MoodEntry.fromFirestore(doc)).toList();
+        final entries = filteredDocs.map((doc) => MoodEntry.fromFirestore(doc)).toList();
 
         switch (_chartType) {
           case 'bar':
