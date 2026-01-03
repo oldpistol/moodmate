@@ -47,6 +47,14 @@
 				{ "fieldPath": "userId", "order": "ASCENDING" },
 				{ "fieldPath": "status", "order": "ASCENDING" }
 			]
+		},
+		{
+			"collectionGroup": "counsellor_assignments",
+			"queryScope": "COLLECTION",
+			"fields": [
+				{ "fieldPath": "counsellorId", "order": "ASCENDING" },
+				{ "fieldPath": "isActive", "order": "ASCENDING" }
+			]
 		}
 	],
 	"fieldOverrides": []

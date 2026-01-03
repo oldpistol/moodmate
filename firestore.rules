@@ -74,19 +74,24 @@ service cloud.firestore {
     // Helper function to check if counsellor is assigned to user
     function isAssignedCounsellor(userId) {
       return exists(/databases/$(database)/documents/counsellor_assignments/$(userId))
-          && get(/databases/$(database)/documents/counsellor_assignments/$(userId)).data.counsellorId == request.auth.uid;
+          && get(/databases/$(database)/documents/counsellor_assignments/$(userId)).data.counsellorId == request.auth.uid
+          && get(/databases/$(database)/documents/counsellor_assignments/$(userId)).data.isActive == true;
     }
     
     // Counsellor assignments collection rules
     match /counsellor_assignments/{userId} {
       // Users can read their own assignment
-      // Counsellors can read assignments they're part of
+      // Counsellors can read assignments they're part of and query their assignments
       allow read: if isOwner(userId) 
-                  || (isCounsellor() && resource.data.counsellorId == request.auth.uid);
+                  || (isCounsellor() && resource.data.counsellorId == request.auth.uid)
+                  || isAdmin();
       
-      // Only counsellors can create assignments
-      allow create: if isCounsellor() 
-                    && request.resource.data.counsellorId == request.auth.uid;
+      // Allow counsellors to query their assignments
+      allow list: if isCounsellor() || isAdmin();
+      
+      // Only counsellors and admins can create assignments
+      allow create: if (isCounsellor() && request.resource.data.counsellorId == request.auth.uid)
+                    || isAdmin();
       
       // Only the assigned counsellor or admin can update
       allow update: if (isCounsellor() && resource.data.counsellorId == request.auth.uid) 

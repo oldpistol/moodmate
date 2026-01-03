@@ -160,20 +160,20 @@ This document breaks down the use cases into actionable development tasks, organ
 - [x] Handle "no counsellor available" scenario
 - [x] Add request status tracking in Firestore (pending, accepted, completed)
 
-### Task 4.2: Counsellor Views User Mood Summary (UC-08)
+### Task 4.2: Counsellor Views User Mood Summary (UC-08) ✅
 
 **Priority:** Medium  
 **Dependencies:** Task 4.1, Task 3.1
 
-- [ ] Design counsellor dashboard UI
-- [ ] Implement user selection/assignment logic in Firestore
-- [ ] Query Firestore for assigned user data
-- [ ] Enforce user consent and privacy permissions using Firestore Security Rules
-- [ ] Display user mood trends and charts
-- [ ] Query and show recent mood entries from Firestore
-- [ ] Implement access control checks using Firestore Security Rules
-- [ ] Handle "access denied" for unauthorized requests
-- [ ] Add filtering and date range options with Firestore queries
+- [x] Design counsellor dashboard UI
+- [x] Implement user selection/assignment logic in Firestore
+- [x] Query Firestore for assigned user data
+- [x] Enforce user consent and privacy permissions using Firestore Security Rules
+- [x] Display user mood trends and charts
+- [x] Query and show recent mood entries from Firestore
+- [x] Implement access control checks using Firestore Security Rules
+- [x] Handle "access denied" for unauthorized requests
+- [x] Add filtering and date range options with Firestore queries
 
 ### Task 4.3: Counsellor Provides Advice (UC-09)
 

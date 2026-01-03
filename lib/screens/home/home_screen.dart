@@ -7,6 +7,7 @@ import '../mood/mood_history_screen.dart';
 import '../mood/mood_trends_screen.dart';
 import '../counsellor/counsellor_list_screen.dart';
 import '../counsellor/support_requests_screen.dart';
+import '../counsellor/counsellor_dashboard_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -279,8 +280,10 @@ class HomeScreen extends StatelessWidget {
           subtitle: 'View your assigned clients',
           color: Colors.green,
           onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Client management coming soon')),
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const CounsellorDashboardScreen(),
+              ),
             );
           },
         ),
