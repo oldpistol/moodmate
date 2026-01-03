@@ -116,18 +116,14 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('${widget.user.name}\'s Mood Summary'),
-      ),
+      appBar: AppBar(title: Text('${widget.user.name}\'s Mood Summary')),
       body: _buildBody(),
     );
   }
 
   Widget _buildBody() {
     if (_isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+      return const Center(child: CircularProgressIndicator());
     }
 
     if (!_hasAccess || _errorMessage != null) {
@@ -209,17 +205,16 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
                 children: [
                   Text(
                     widget.user.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     widget.user.email,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey[600],
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
                   ),
                 ],
               ),
@@ -239,10 +234,9 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
           children: [
             Text(
               'Time Range',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
             SegmentedButton<String>(
@@ -282,8 +276,9 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
     }
 
     // Calculate statistics
-    final completedEntries =
-        _moodEntries.where((e) => e.emotion != null).toList();
+    final completedEntries = _moodEntries
+        .where((e) => e.emotion != null)
+        .toList();
     final emotionCounts = <String, int>{};
 
     for (final entry in completedEntries) {
@@ -303,15 +298,17 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
           children: [
             Text(
               'Mood Statistics',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             _buildStatRow('Total Entries', _moodEntries.length.toString()),
             const SizedBox(height: 8),
-            _buildStatRow('Analyzed Entries', completedEntries.length.toString()),
+            _buildStatRow(
+              'Analyzed Entries',
+              completedEntries.length.toString(),
+            ),
             const SizedBox(height: 8),
             _buildStatRow(
               'Most Common Mood',
@@ -330,16 +327,16 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
       children: [
         Text(
           label,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[600],
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
         ),
         Text(
           value,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: color,
-              ),
+            fontWeight: FontWeight.bold,
+            color: color,
+          ),
         ),
       ],
     );
@@ -350,8 +347,9 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
       return const SizedBox.shrink();
     }
 
-    final completedEntries =
-        _moodEntries.where((e) => e.emotion != null).toList();
+    final completedEntries = _moodEntries
+        .where((e) => e.emotion != null)
+        .toList();
 
     if (completedEntries.isEmpty) {
       return const SizedBox.shrink();
@@ -372,10 +370,9 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
           children: [
             Text(
               'Mood Distribution',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             SizedBox(
@@ -443,10 +440,9 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
       children: [
         Text(
           'Recent Entries',
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium
-              ?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 12),
         ...(_moodEntries.take(10).map((entry) => _buildEntryCard(entry))),
@@ -490,9 +486,9 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
                   ),
                 Text(
                   _formatDateTime(entry.timestamp),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.grey[600],
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
                 ),
               ],
             ),

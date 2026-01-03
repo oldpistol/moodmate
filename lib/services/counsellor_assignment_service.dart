@@ -84,8 +84,10 @@ class CounsellorAssignmentService {
   // Get counsellor for a user
   Future<String?> getCounsellorForUser(String userId) async {
     try {
-      final doc =
-          await _firestore.collection(_collectionName).doc(userId).get();
+      final doc = await _firestore
+          .collection(_collectionName)
+          .doc(userId)
+          .get();
 
       if (!doc.exists) {
         return null;
@@ -104,8 +106,10 @@ class CounsellorAssignmentService {
     required String counsellorId,
   }) async {
     try {
-      final doc =
-          await _firestore.collection(_collectionName).doc(userId).get();
+      final doc = await _firestore
+          .collection(_collectionName)
+          .doc(userId)
+          .get();
 
       if (!doc.exists) {
         return false;
@@ -126,22 +130,22 @@ class CounsellorAssignmentService {
         .where('isActive', isEqualTo: true)
         .snapshots()
         .asyncMap((snapshot) async {
-      if (snapshot.docs.isEmpty) {
-        return <UserModel>[];
-      }
+          if (snapshot.docs.isEmpty) {
+            return <UserModel>[];
+          }
 
-      final userIds = snapshot.docs.map((doc) => doc.id).toList();
-      final userDocs = await Future.wait(
-        userIds.map(
-          (userId) => _firestore.collection('users').doc(userId).get(),
-        ),
-      );
+          final userIds = snapshot.docs.map((doc) => doc.id).toList();
+          final userDocs = await Future.wait(
+            userIds.map(
+              (userId) => _firestore.collection('users').doc(userId).get(),
+            ),
+          );
 
-      return userDocs
-          .where((doc) => doc.exists)
-          .map((doc) => UserModel.fromFirestore(doc))
-          .toList();
-    });
+          return userDocs
+              .where((doc) => doc.exists)
+              .map((doc) => UserModel.fromFirestore(doc))
+              .toList();
+        });
   }
 
   // Update assignment notes

@@ -50,6 +50,32 @@ class MoodEntryService {
     }
   }
 
+  // Get mood entries for a specific user within a date range
+  Future<List<MoodEntry>> getUserMoodEntriesByDateRange(
+    String userId,
+    DateTime startDate,
+    DateTime endDate,
+  ) async {
+    try {
+      final querySnapshot = await _firestore
+          .collection(_collectionName)
+          .where('userId', isEqualTo: userId)
+          .where(
+            'timestamp',
+            isGreaterThanOrEqualTo: Timestamp.fromDate(startDate),
+          )
+          .where('timestamp', isLessThanOrEqualTo: Timestamp.fromDate(endDate))
+          .orderBy('timestamp', descending: true)
+          .get();
+
+      return querySnapshot.docs
+          .map((doc) => MoodEntry.fromFirestore(doc))
+          .toList();
+    } catch (e) {
+      throw Exception('Failed to fetch mood entries by date range: $e');
+    }
+  }
+
   // Get mood entries for a specific date
   Future<List<MoodEntry>> getMoodEntriesByDate({
     required String userId,

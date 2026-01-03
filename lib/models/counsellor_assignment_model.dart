@@ -22,8 +22,9 @@ class CounsellorAssignmentModel {
     return {
       'counsellorId': counsellorId,
       'assignedAt': Timestamp.fromDate(assignedAt),
-      'unassignedAt':
-          unassignedAt != null ? Timestamp.fromDate(unassignedAt!) : null,
+      'unassignedAt': unassignedAt != null
+          ? Timestamp.fromDate(unassignedAt!)
+          : null,
       'isActive': isActive,
       'notes': notes,
     };

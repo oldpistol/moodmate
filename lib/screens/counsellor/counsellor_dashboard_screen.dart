@@ -72,9 +72,7 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
 
   Widget _buildBody() {
     if (_isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+      return const Center(child: CircularProgressIndicator());
     }
 
     if (_errorMessage != null) {
@@ -149,7 +147,9 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
             children: [
               CircleAvatar(
                 radius: 32,
-                backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                backgroundColor: Theme.of(
+                  context,
+                ).primaryColor.withOpacity(0.1),
                 child: Text(
                   user.name.isNotEmpty ? user.name[0].toUpperCase() : 'U',
                   style: TextStyle(
@@ -166,24 +166,23 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
                   children: [
                     Text(
                       user.name,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       user.email,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.grey[600],
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Member since ${_formatDate(user.createdAt)}',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.grey[500],
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(color: Colors.grey[500]),
                     ),
                   ],
                 ),
