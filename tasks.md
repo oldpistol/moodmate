@@ -18,21 +18,21 @@ This document breaks down the use cases into actionable development tasks, organ
 
 ## 1. Authentication & User Management
 
-### Task 1.1: User Registration (UC-01)
+### Task 1.1: User Registration (UC-01) ✅
 
 **Priority:** High  
 **Dependencies:** None
 
-- [ ] Design and implement user registration UI (sign-up form)
-- [ ] Set up Firebase Authentication
-- [ ] Create user document schema in Firestore (name, email, role, timestamps)
-- [ ] Implement Firebase Auth registration method
-- [ ] Add email validation logic
-- [ ] Add password strength validation
-- [ ] Handle duplicate email check (Firebase built-in)
-- [ ] Send email verification using Firebase Auth
-- [ ] Create user profile document in Firestore after successful registration
-- [ ] Handle alternate flow: email already exists error
+- [x] Design and implement user registration UI (sign-up form)
+- [x] Set up Firebase Authentication
+- [x] Create user document schema in Firestore (name, email, role, timestamps)
+- [x] Implement Firebase Auth registration method
+- [x] Add email validation logic
+- [x] Add password strength validation
+- [x] Handle duplicate email check (Firebase built-in)
+- [x] Send email verification using Firebase Auth
+- [x] Create user profile document in Firestore after successful registration
+- [x] Handle alternate flow: email already exists error
 
 ### Task 1.2: User Login (UC-02)
 
