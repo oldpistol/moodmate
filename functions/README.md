@@ -123,7 +123,7 @@ Allows users to manually retry analysis for a failed mood entry.
 
 ```javascript
 {
-	entryId: "the-mood-entry-id";
+  entryId: "the-mood-entry-id";
 }
 ```
 
@@ -205,11 +205,11 @@ Increase the timeout in the function configuration:
 
 ```typescript
 export const analyzeMoodEntry = functions
-	.runWith({ timeoutSeconds: 120 })
-	.firestore.document("mood_entries/{entryId}")
-	.onCreate(async (snap, context) => {
-		// ...
-	});
+  .runWith({ timeoutSeconds: 120 })
+  .firestore.document("mood_entries/{entryId}")
+  .onCreate(async (snap, context) => {
+    // ...
+  });
 ```
 
 ### OpenAI rate limit errors
@@ -222,15 +222,7 @@ If you hit rate limits:
 
 ## Testing
 
-### Unit Tests (TODO)
-
-```bash
-npm test
-```
-
-### Integration Tests
-
-Use the Firebase Emulator Suite to test functions locally before deployment.
+Use the Firebase Emulator Suite to test functions locally.
 
 ## License
 
