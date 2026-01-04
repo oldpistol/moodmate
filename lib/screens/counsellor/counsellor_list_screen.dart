@@ -54,13 +54,14 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
   }
 
   Color _getStatusColor(CounsellorStatus status) {
+    final colorScheme = Theme.of(context).colorScheme;
     switch (status) {
       case CounsellorStatus.available:
-        return Colors.green;
+        return colorScheme.tertiary;
       case CounsellorStatus.busy:
-        return Colors.orange;
+        return colorScheme.secondary;
       case CounsellorStatus.offline:
-        return Colors.grey;
+        return colorScheme.onSurfaceVariant;
     }
   }
 
@@ -68,7 +69,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contact a Counsellor'),
+        title: const Text('Contact a counsellor'),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -81,6 +82,8 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
   }
 
   Widget _buildBody() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -90,7 +93,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 64, color: Colors.red),
+            Icon(Icons.error_outline, size: 64, color: colorScheme.error),
             const SizedBox(height: 16),
             Text(
               'Failed to load counsellors',
@@ -99,7 +102,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
             const SizedBox(height: 8),
             Text(_errorMessage!),
             const SizedBox(height: 16),
-            ElevatedButton(
+            FilledButton.tonal(
               onPressed: _loadCounsellors,
               child: const Text('Retry'),
             ),
@@ -113,7 +116,11 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.people_outline, size: 64, color: Colors.grey),
+            Icon(
+              Icons.people_outline,
+              size: 64,
+              color: colorScheme.onSurfaceVariant,
+            ),
             const SizedBox(height: 16),
             Text(
               'No counsellors available',
@@ -122,7 +129,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
             const SizedBox(height: 8),
             const Text('Please check back later.'),
             const SizedBox(height: 16),
-            ElevatedButton(
+            FilledButton.tonal(
               onPressed: _loadCounsellors,
               child: const Text('Refresh'),
             ),
@@ -134,7 +141,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
     return RefreshIndicator(
       onRefresh: _loadCounsellors,
       child: ListView.builder(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
         itemCount: _counsellors.length,
         itemBuilder: (context, index) {
           final counsellor = _counsellors[index];
@@ -145,6 +152,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
   }
 
   Widget _buildCounsellorCard(CounsellorModel counsellor) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       child: InkWell(
@@ -165,9 +173,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
               // Profile Image
               CircleAvatar(
                 radius: 32,
-                backgroundColor: Theme.of(
-                  context,
-                ).primaryColor.withOpacity(0.1),
+                backgroundColor: colorScheme.primaryContainer,
                 backgroundImage: counsellor.profileImageUrl != null
                     ? NetworkImage(counsellor.profileImageUrl!)
                     : null,
@@ -178,8 +184,8 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
                             : '?',
                         style: TextStyle(
                           fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.w700,
+                          color: colorScheme.onPrimaryContainer,
                         ),
                       )
                     : null,
@@ -196,7 +202,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
                           child: Text(
                             counsellor.name,
                             style: Theme.of(context).textTheme.titleMedium
-                                ?.copyWith(fontWeight: FontWeight.bold),
+                                ?.copyWith(fontWeight: FontWeight.w700),
                           ),
                         ),
                         Container(
@@ -207,7 +213,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
                           decoration: BoxDecoration(
                             color: _getStatusColor(
                               counsellor.status,
-                            ).withOpacity(0.1),
+                            ).withAlpha(26),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
                               color: _getStatusColor(counsellor.status),
@@ -219,7 +225,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
                             style: TextStyle(
                               fontSize: 12,
                               color: _getStatusColor(counsellor.status),
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
@@ -230,8 +236,8 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
                       Text(
                         counsellor.specialization!,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.w500,
+                          color: colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
@@ -240,7 +246,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
                       Text(
                         '${counsellor.yearsOfExperience} years of experience',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.grey[500],
+                          color: colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -257,7 +263,7 @@ class _CounsellorListScreenState extends State<CounsellorListScreen> {
                 ),
               ),
               const SizedBox(width: 8),
-              const Icon(Icons.chevron_right, color: Colors.grey),
+              Icon(Icons.chevron_right, color: colorScheme.onSurfaceVariant),
             ],
           ),
         ),

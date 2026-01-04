@@ -16,6 +16,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Consumer<AuthProvider>(
       builder: (context, authProvider, child) {
         final user = authProvider.userModel;
@@ -23,7 +26,6 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text('MoodMate'),
-            centerTitle: true,
             actions: [
               IconButton(
                 icon: const Icon(Icons.logout),
@@ -57,13 +59,12 @@ class HomeScreen extends StatelessWidget {
           body: user == null
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Welcome card
                       Card(
-                        elevation: 2,
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Column(
@@ -73,15 +74,15 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   CircleAvatar(
                                     radius: 30,
-                                    backgroundColor: Colors.deepPurple,
+                                    backgroundColor: colorScheme.primary,
                                     child: Text(
                                       user.name.isNotEmpty
                                           ? user.name[0].toUpperCase()
                                           : 'U',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 28,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
+                                        color: colorScheme.onPrimary,
+                                        fontWeight: FontWeight.w700,
                                       ),
                                     ),
                                   ),
@@ -97,7 +98,8 @@ class HomeScreen extends StatelessWidget {
                                               .textTheme
                                               .bodyMedium
                                               ?.copyWith(
-                                                color: Colors.grey[600],
+                                                color: colorScheme
+                                                    .onSurfaceVariant,
                                               ),
                                         ),
                                         Text(
@@ -106,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                                               .textTheme
                                               .headlineSmall
                                               ?.copyWith(
-                                                fontWeight: FontWeight.bold,
+                                                fontWeight: FontWeight.w700,
                                               ),
                                         ),
                                       ],
@@ -118,12 +120,15 @@ class HomeScreen extends StatelessWidget {
                               Chip(
                                 label: Text(
                                   _getRoleDisplayName(user.role),
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
+                                  style: TextStyle(
+                                    color: colorScheme.onSecondaryContainer,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                backgroundColor: _getRoleColor(user.role),
+                                backgroundColor: _getRoleColor(
+                                  user.role,
+                                  colorScheme,
+                                ),
                               ),
                             ],
                           ),
@@ -156,18 +161,19 @@ class HomeScreen extends StatelessWidget {
     }
   }
 
-  Color _getRoleColor(UserRole role) {
+  Color _getRoleColor(UserRole role, ColorScheme colorScheme) {
     switch (role) {
       case UserRole.user:
-        return Colors.blue;
+        return colorScheme.secondaryContainer;
       case UserRole.counsellor:
-        return Colors.green;
+        return colorScheme.tertiaryContainer;
       case UserRole.admin:
-        return Colors.purple;
+        return colorScheme.primaryContainer;
     }
   }
 
   Widget _buildUserDashboard(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -185,7 +191,7 @@ class HomeScreen extends StatelessWidget {
           icon: Icons.edit_note,
           title: 'Daily Mood Entry',
           subtitle: 'Track your mood today',
-          color: Colors.deepPurple,
+          color: colorScheme.primary,
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const MoodEntryScreen()),
@@ -200,7 +206,7 @@ class HomeScreen extends StatelessWidget {
           icon: Icons.history,
           title: 'Mood History',
           subtitle: 'View your past entries',
-          color: Colors.blue,
+          color: colorScheme.secondary,
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -217,7 +223,7 @@ class HomeScreen extends StatelessWidget {
           icon: Icons.show_chart,
           title: 'Mood Trends',
           subtitle: 'Visualize your mood patterns',
-          color: Colors.teal,
+          color: colorScheme.tertiary,
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const MoodTrendsScreen()),
@@ -232,7 +238,7 @@ class HomeScreen extends StatelessWidget {
           icon: Icons.support_agent,
           title: 'Contact Counsellor',
           subtitle: 'Connect with a professional',
-          color: Colors.green,
+          color: colorScheme.primary,
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -249,7 +255,7 @@ class HomeScreen extends StatelessWidget {
           icon: Icons.question_answer,
           title: 'My Support Requests',
           subtitle: 'View your requests',
-          color: Colors.orange,
+          color: colorScheme.secondary,
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -263,6 +269,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildCounsellorDashboard(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -280,7 +287,7 @@ class HomeScreen extends StatelessWidget {
           icon: Icons.people_alt,
           title: 'My Clients',
           subtitle: 'View your assigned clients',
-          color: Colors.green,
+          color: colorScheme.primary,
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -297,7 +304,7 @@ class HomeScreen extends StatelessWidget {
           icon: Icons.pending_actions,
           title: 'Pending Requests',
           subtitle: 'Accept new support requests',
-          color: Colors.orange,
+          color: colorScheme.secondary,
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -314,7 +321,7 @@ class HomeScreen extends StatelessWidget {
           icon: Icons.message,
           title: 'Messages',
           subtitle: 'Chat with your clients',
-          color: Colors.blue,
+          color: colorScheme.tertiary,
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -335,8 +342,8 @@ class HomeScreen extends StatelessWidget {
     required Color color,
     required VoidCallback onTap,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
-      elevation: 2,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
@@ -347,7 +354,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withAlpha(26),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(icon, color: color, size: 32),
@@ -360,20 +367,24 @@ class HomeScreen extends StatelessWidget {
                     Text(
                       title,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.arrow_forward_ios, size: 16),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 16,
+                color: colorScheme.onSurfaceVariant,
+              ),
             ],
           ),
         ),

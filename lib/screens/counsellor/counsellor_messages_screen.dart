@@ -203,18 +203,19 @@ class _CounsellorMessagesScreenState extends State<CounsellorMessagesScreen> {
     int unreadCount,
     DateTime? lastMessageAt,
   ) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
         leading: Stack(
           children: [
             CircleAvatar(
-              backgroundColor: Colors.blue.shade100,
+              backgroundColor: colorScheme.secondaryContainer,
               child: Text(
                 userName.isNotEmpty ? userName[0].toUpperCase() : '?',
                 style: TextStyle(
-                  color: Colors.blue.shade700,
-                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSecondaryContainer,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
@@ -224,8 +225,8 @@ class _CounsellorMessagesScreenState extends State<CounsellorMessagesScreen> {
                 top: 0,
                 child: Container(
                   padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
+                  decoration: BoxDecoration(
+                    color: colorScheme.error,
                     shape: BoxShape.circle,
                   ),
                   constraints: const BoxConstraints(
@@ -237,7 +238,7 @@ class _CounsellorMessagesScreenState extends State<CounsellorMessagesScreen> {
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 10,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -248,14 +249,14 @@ class _CounsellorMessagesScreenState extends State<CounsellorMessagesScreen> {
         title: Text(
           userName,
           style: TextStyle(
-            fontWeight: unreadCount > 0 ? FontWeight.bold : FontWeight.normal,
+            fontWeight: unreadCount > 0 ? FontWeight.w700 : FontWeight.w500,
           ),
         ),
         subtitle: Text(
           lastMessageAt != null
               ? _formatDate(lastMessageAt)
               : 'No messages yet',
-          style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+          style: TextStyle(fontSize: 12, color: colorScheme.onSurfaceVariant),
         ),
         trailing: const Icon(Icons.chevron_right),
         onTap: () async {

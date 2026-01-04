@@ -23,7 +23,7 @@ class _MoodTrendsScreenState extends State<MoodTrendsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mood Trends'),
+        title: const Text('Mood trends'),
         actions: [
           PopupMenuButton<String>(
             icon: const Icon(Icons.show_chart),
@@ -50,14 +50,14 @@ class _MoodTrendsScreenState extends State<MoodTrendsScreen> {
   }
 
   Widget _buildTimeRangeSelector() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+      child: Wrap(
+        spacing: 8,
         children: [
-          _buildTimeRangeChip('7 Days', 7),
-          _buildTimeRangeChip('14 Days', 14),
-          _buildTimeRangeChip('30 Days', 30),
+          _buildTimeRangeChip('7 days', 7),
+          _buildTimeRangeChip('14 days', 14),
+          _buildTimeRangeChip('30 days', 30),
         ],
       ),
     );
@@ -77,6 +77,7 @@ class _MoodTrendsScreenState extends State<MoodTrendsScreen> {
   }
 
   Widget _buildChart() {
+    final colorScheme = Theme.of(context).colorScheme;
     final user = _auth.currentUser;
     if (user == null) {
       return const Center(child: Text('Please log in to view trends'));
@@ -119,9 +120,7 @@ class _MoodTrendsScreenState extends State<MoodTrendsScreen> {
                 Icon(
                   Icons.insert_chart_outlined,
                   size: 64,
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.secondary.withOpacity(0.5),
+                  color: colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(height: 16),
                 Text(
@@ -275,7 +274,7 @@ class _MoodTrendsScreenState extends State<MoodTrendsScreen> {
               ),
               belowBarData: BarAreaData(
                 show: true,
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                color: Theme.of(context).colorScheme.primary.withAlpha(26),
               ),
             ),
           ],
@@ -448,7 +447,7 @@ class _MoodTrendsScreenState extends State<MoodTrendsScreen> {
               final mostCommonEmotion = emotionCounts.entries
                   .reduce((a, b) => a.value > b.value ? a : b)
                   .key;
-              color = _getEmotionColor(mostCommonEmotion).withOpacity(0.6);
+              color = _getEmotionColor(mostCommonEmotion).withAlpha(153);
               emoji = _getEmotionEmoji(mostCommonEmotion);
             }
           }

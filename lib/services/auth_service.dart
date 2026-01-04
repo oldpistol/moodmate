@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:developer' as developer;
 import '../models/user_model.dart';
 import 'counsellor_service.dart';
 
@@ -62,7 +63,7 @@ class AuthService {
         } catch (e) {
           // Log error but don't fail registration
           // Admin can manually create counsellor profile later
-          print('Warning: Failed to create counsellor profile: $e');
+          developer.log('Warning: Failed to create counsellor profile: $e');
         }
       }
 

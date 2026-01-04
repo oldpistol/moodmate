@@ -57,35 +57,43 @@ class PermissionGuard extends StatelessWidget {
   }
 
   Widget _buildAccessDenied(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Access Denied'), centerTitle: true),
+      appBar: AppBar(title: const Text('Access denied')),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.lock, size: 80, color: Colors.red),
+              Icon(
+                Icons.lock_outline,
+                size: 64,
+                color: colorScheme.onSurfaceVariant,
+              ),
               const SizedBox(height: 24),
               Text(
                 'Access Denied',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(height: 16),
               Text(
                 message ?? 'You do not have permission to access this feature.',
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
-              ElevatedButton.icon(
+              FilledButton.tonal(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: const Icon(Icons.arrow_back),
-                label: const Text('Go Back'),
+                child: const Text('Go back'),
               ),
             ],
           ),
@@ -114,10 +122,7 @@ mixin PermissionCheckerMixin<T extends StatefulWidget> on State<T> {
 
   void showPermissionDenied() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('You do not have permission to perform this action.'),
-        backgroundColor: Colors.red,
-      ),
+      const SnackBar(content: Text('You do not have permission to do that.')),
     );
   }
 }

@@ -161,6 +161,8 @@ class _SupportRequestsScreenState extends State<SupportRequestsScreen> {
   }
 
   Widget _buildBody() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -170,7 +172,7 @@ class _SupportRequestsScreenState extends State<SupportRequestsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 64, color: Colors.red),
+            Icon(Icons.error_outline, size: 64, color: colorScheme.error),
             const SizedBox(height: 16),
             Text(
               'Failed to load support requests',
@@ -188,7 +190,11 @@ class _SupportRequestsScreenState extends State<SupportRequestsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.support_agent, size: 64, color: Colors.grey),
+            Icon(
+              Icons.support_agent,
+              size: 64,
+              color: colorScheme.onSurfaceVariant,
+            ),
             const SizedBox(height: 16),
             Text(
               'No support requests',
@@ -202,7 +208,7 @@ class _SupportRequestsScreenState extends State<SupportRequestsScreen> {
     }
 
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
       itemCount: _requests.length,
       itemBuilder: (context, index) {
         final request = _requests[index];
@@ -212,6 +218,7 @@ class _SupportRequestsScreenState extends State<SupportRequestsScreen> {
   }
 
   Widget _buildRequestCard(SupportRequestModel request) {
+    final colorScheme = Theme.of(context).colorScheme;
     final canCancel = request.status == SupportRequestStatus.pending;
 
     return Card(
@@ -234,7 +241,7 @@ class _SupportRequestsScreenState extends State<SupportRequestsScreen> {
                     _getStatusText(request.status),
                     style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                       color: _getStatusColor(request.status),
                     ),
                   ),
@@ -253,8 +260,8 @@ class _SupportRequestsScreenState extends State<SupportRequestsScreen> {
                 'Message:',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey[600],
-                  fontWeight: FontWeight.w500,
+                  color: colorScheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 4),
@@ -269,13 +276,16 @@ class _SupportRequestsScreenState extends State<SupportRequestsScreen> {
                   children: [
                     Text(
                       'Created:',
-                      style: TextStyle(fontSize: 11, color: Colors.grey[600]),
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                     Text(
                       _formatDate(request.createdAt),
                       style: const TextStyle(
                         fontSize: 12,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
@@ -286,13 +296,16 @@ class _SupportRequestsScreenState extends State<SupportRequestsScreen> {
                     children: [
                       Text(
                         'Accepted:',
-                        style: TextStyle(fontSize: 11, color: Colors.grey[600]),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
                       Text(
                         _formatDate(request.acceptedAt!),
                         style: const TextStyle(
                           fontSize: 12,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
@@ -303,7 +316,7 @@ class _SupportRequestsScreenState extends State<SupportRequestsScreen> {
               const SizedBox(height: 12),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton.icon(
+                child: FilledButton.tonal(
                   onPressed: () async {
                     try {
                       // Get conversation thread details
@@ -355,8 +368,7 @@ class _SupportRequestsScreenState extends State<SupportRequestsScreen> {
                       }
                     }
                   },
-                  icon: const Icon(Icons.chat),
-                  label: const Text('View Conversation'),
+                  child: const Text('View conversation'),
                 ),
               ),
             ],

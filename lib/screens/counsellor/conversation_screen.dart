@@ -143,15 +143,20 @@ class _ConversationScreenState extends State<ConversationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(widget.otherUserName),
-            const Text(
+            Text(
               'Online',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),
@@ -230,27 +235,36 @@ class _ConversationScreenState extends State<ConversationScreen> {
   }
 
   Widget _buildDateDivider(DateTime date) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Row(
         children: [
-          const Expanded(child: Divider()),
+          Expanded(child: Divider(color: colorScheme.outlineVariant)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               _formatDate(date),
-              style: Theme.of(
-                context,
-              ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
-          const Expanded(child: Divider()),
+          Expanded(child: Divider(color: colorScheme.outlineVariant)),
         ],
       ),
     );
   }
 
   Widget _buildMessageBubble(MessageModel message, bool isMe) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final bubbleColor = isMe
+        ? colorScheme.primaryContainer
+        : colorScheme.surfaceContainerHighest;
+    final bubbleTextColor = isMe
+        ? colorScheme.onPrimaryContainer
+        : colorScheme.onSurface;
+
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
@@ -266,7 +280,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(
-                color: isMe ? Theme.of(context).primaryColor : Colors.grey[300],
+                color: bubbleColor,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(16),
                   topRight: const Radius.circular(16),
@@ -276,10 +290,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
               ),
               child: Text(
                 message.content,
-                style: TextStyle(
-                  color: isMe ? Colors.white : Colors.black87,
-                  fontSize: 15,
-                ),
+                style: TextStyle(color: bubbleTextColor, fontSize: 15),
               ),
             ),
             const SizedBox(height: 4),
@@ -289,7 +300,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 Text(
                   _formatTime(message.timestamp),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
+                    color: colorScheme.onSurfaceVariant,
                     fontSize: 11,
                   ),
                 ),
@@ -298,7 +309,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
                   Icon(
                     message.isRead ? Icons.done_all : Icons.done,
                     size: 14,
-                    color: message.isRead ? Colors.blue : Colors.grey,
+                    color: message.isRead
+                        ? colorScheme.primary
+                        : colorScheme.onSurfaceVariant,
                   ),
                 ],
               ],
@@ -310,18 +323,12 @@ class _ConversationScreenState extends State<ConversationScreen> {
   }
 
   Widget _buildMessageInput() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
       decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 3,
-            offset: const Offset(0, -1),
-          ),
-        ],
+        color: colorScheme.surface,
+        border: Border(top: BorderSide(color: colorScheme.outlineVariant)),
       ),
       child: SafeArea(
         child: Row(
@@ -331,15 +338,11 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 controller: _messageController,
                 decoration: InputDecoration(
                   hintText: 'Type a message...',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide: BorderSide.none,
-                  ),
                   filled: true,
-                  fillColor: Colors.grey[100],
+                  fillColor: colorScheme.surfaceContainerHighest,
                   contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
+                    horizontal: 16,
+                    vertical: 12,
                   ),
                 ),
                 maxLines: null,
@@ -348,22 +351,22 @@ class _ConversationScreenState extends State<ConversationScreen> {
               ),
             ),
             const SizedBox(width: 8),
-            CircleAvatar(
-              backgroundColor: Theme.of(context).primaryColor,
-              child: IconButton(
-                icon: _isSending
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.white,
-                          ),
-                        ),
-                      )
-                    : const Icon(Icons.send, color: Colors.white),
+            SizedBox(
+              height: 44,
+              width: 44,
+              child: FilledButton(
                 onPressed: _isSending ? null : _sendMessage,
+                style: FilledButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: const CircleBorder(),
+                ),
+                child: _isSending
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.send),
               ),
             ),
           ],

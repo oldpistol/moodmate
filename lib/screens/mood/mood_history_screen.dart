@@ -55,6 +55,7 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
   }
 
   Widget _buildFilterChip() {
+    final colorScheme = Theme.of(context).colorScheme;
     String filterText = '';
     switch (_filterOption) {
       case 'week':
@@ -77,6 +78,7 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
       child: Chip(
         label: Text(filterText),
         deleteIcon: const Icon(Icons.close),
+        side: BorderSide(color: colorScheme.outlineVariant),
         onDeleted: () {
           setState(() {
             _filterOption = 'all';
@@ -90,6 +92,7 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
   }
 
   Widget _buildMoodList() {
+    final colorScheme = Theme.of(context).colorScheme;
     final user = _auth.currentUser;
     if (user == null) {
       return const Center(
@@ -111,11 +114,11 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.error_outline, size: 48, color: Colors.red),
+                Icon(Icons.error_outline, size: 48, color: colorScheme.error),
                 const SizedBox(height: 16),
                 Text('Error: ${snapshot.error}'),
                 const SizedBox(height: 16),
-                ElevatedButton(
+                FilledButton.tonal(
                   onPressed: () => setState(() {}),
                   child: const Text('Retry'),
                 ),
@@ -177,9 +180,7 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
                 Icon(
                   Icons.mood_outlined,
                   size: 64,
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.secondary.withOpacity(0.5),
+                  color: colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(height: 16),
                 Text(
@@ -211,7 +212,7 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
             return false;
           },
           child: ListView.builder(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
             itemCount: filteredDocs.length + (_hasMore ? 1 : 0),
             itemBuilder: (context, index) {
               if (index == filteredDocs.length) {
@@ -237,6 +238,7 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
   }
 
   Widget _buildMoodCard(MoodEntry entry) {
+    final colorScheme = Theme.of(context).colorScheme;
     final timestamp = entry.timestamp;
     final dateStr = DateFormat('MMM d, yyyy').format(timestamp);
     final timeStr = DateFormat('h:mm a').format(timestamp);
@@ -267,7 +269,7 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: emotionColor.withOpacity(0.2),
+                      color: emotionColor.withAlpha(51),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(emotionIcon, color: emotionColor, size: 24),
@@ -281,7 +283,7 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
                           emotion.toUpperCase(),
                           style: TextStyle(
                             fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                             color: emotionColor,
                           ),
                         ),
@@ -300,14 +302,14 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
+                        color: colorScheme.surfaceContainerHighest,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         '${(entry.confidenceScore! * 100).toInt()}%',
                         style: const TextStyle(
                           fontSize: 12,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
@@ -329,15 +331,15 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
                       Icon(
                         Icons.lightbulb_outline,
                         size: 16,
-                        color: Colors.amber.shade700,
+                        color: colorScheme.tertiary,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         '${entry.recommendations!.length} recommendations',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.amber.shade700,
-                          fontWeight: FontWeight.w500,
+                          color: colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
@@ -462,7 +464,9 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
                 title: const Text('All Time'),
                 leading: Radio<String>(
                   value: 'all',
+                  // ignore: deprecated_member_use
                   groupValue: _filterOption,
+                  // ignore: deprecated_member_use
                   onChanged: (value) {
                     setState(() {
                       _filterOption = value!;
@@ -478,7 +482,9 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
                 title: const Text('Last 7 Days'),
                 leading: Radio<String>(
                   value: 'week',
+                  // ignore: deprecated_member_use
                   groupValue: _filterOption,
+                  // ignore: deprecated_member_use
                   onChanged: (value) {
                     setState(() {
                       _filterOption = value!;
@@ -494,7 +500,9 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
                 title: const Text('Last 30 Days'),
                 leading: Radio<String>(
                   value: 'month',
+                  // ignore: deprecated_member_use
                   groupValue: _filterOption,
+                  // ignore: deprecated_member_use
                   onChanged: (value) {
                     setState(() {
                       _filterOption = value!;
@@ -510,7 +518,9 @@ class _MoodHistoryScreenState extends State<MoodHistoryScreen> {
                 title: const Text('Custom Range'),
                 leading: Radio<String>(
                   value: 'custom',
+                  // ignore: deprecated_member_use
                   groupValue: _filterOption,
+                  // ignore: deprecated_member_use
                   onChanged: (value) {
                     Navigator.pop(context);
                     _selectCustomDateRange();

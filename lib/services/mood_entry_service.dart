@@ -163,10 +163,15 @@ class MoodEntryService {
     try {
       final updateData = <String, dynamic>{};
 
-      if (emotion != null) updateData['emotion'] = emotion;
-      if (confidenceScore != null)
+      if (emotion != null) {
+        updateData['emotion'] = emotion;
+      }
+      if (confidenceScore != null) {
         updateData['confidenceScore'] = confidenceScore;
-      if (analysisStatus != null) updateData['analysisStatus'] = analysisStatus;
+      }
+      if (analysisStatus != null) {
+        updateData['analysisStatus'] = analysisStatus;
+      }
 
       if (emotion != null || confidenceScore != null) {
         updateData['analyzedAt'] = Timestamp.now();

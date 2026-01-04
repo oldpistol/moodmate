@@ -133,6 +133,8 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
   }
 
   Widget _buildBody() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -142,7 +144,7 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.block, size: 64, color: Colors.red),
+            Icon(Icons.block, size: 64, color: colorScheme.error),
             const SizedBox(height: 16),
             Text(
               'Access Denied',
@@ -154,6 +156,7 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
               child: Text(
                 _errorMessage ?? 'You do not have access to this user\'s data.',
                 textAlign: TextAlign.center,
+                style: TextStyle(color: colorScheme.onSurfaceVariant),
               ),
             ),
           ],
@@ -162,7 +165,7 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
     }
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -190,6 +193,7 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
   }
 
   Widget _buildUserInfoCard() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -197,15 +201,15 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
           children: [
             CircleAvatar(
               radius: 32,
-              backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
+              backgroundColor: colorScheme.primaryContainer,
               child: Text(
                 widget.user.name.isNotEmpty
                     ? widget.user.name[0].toUpperCase()
                     : 'U',
                 style: TextStyle(
                   fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.w700,
+                  color: colorScheme.onPrimaryContainer,
                 ),
               ),
             ),
@@ -217,15 +221,15 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
                   Text(
                     widget.user.name,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     widget.user.email,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),
@@ -247,7 +251,7 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
               'Time Range',
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 12),
             SegmentedButton<String>(
@@ -272,6 +276,7 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
   }
 
   Widget _buildMoodStatistics() {
+    final colorScheme = Theme.of(context).colorScheme;
     if (_moodEntries.isEmpty) {
       return Card(
         child: Padding(
@@ -311,7 +316,7 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
               'Mood Statistics',
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 16),
             _buildStatRow('Total Entries', _moodEntries.length.toString()),
@@ -325,6 +330,13 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
               'Most Common Mood',
               _capitalize(mostCommonEmotion),
               color: _getEmotionColor(mostCommonEmotion),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'Based on analyzed entries for the selected period.',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
             ),
           ],
         ),
@@ -479,7 +491,7 @@ class _UserMoodSummaryScreenState extends State<UserMoodSummaryScreen> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: _getEmotionColor(entry.emotion!).withOpacity(0.1),
+                      color: _getEmotionColor(entry.emotion!).withAlpha(26),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: _getEmotionColor(entry.emotion!),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:developer' as developer;
 import '../../models/support_request_model.dart';
 import '../../services/support_request_service.dart';
 import 'dart:async';
@@ -93,9 +94,9 @@ class _PendingRequestsScreenState extends State<PendingRequestsScreen> {
     if (user == null) return;
 
     try {
-      print('DEBUG: Accepting request $requestId for counsellor ${user.uid}');
+      developer.log('Accepting request $requestId for counsellor ${user.uid}');
       await _supportRequestService.acceptSupportRequest(requestId, user.uid);
-      print('DEBUG: Request accepted successfully');
+      developer.log('Request accepted successfully');
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -106,7 +107,7 @@ class _PendingRequestsScreenState extends State<PendingRequestsScreen> {
         );
       }
     } catch (e) {
-      print('DEBUG: Error accepting request: $e');
+      developer.log('Error accepting request: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -127,6 +128,8 @@ class _PendingRequestsScreenState extends State<PendingRequestsScreen> {
   }
 
   Widget _buildBody() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -136,7 +139,7 @@ class _PendingRequestsScreenState extends State<PendingRequestsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 64, color: Colors.red),
+            Icon(Icons.error_outline, size: 64, color: colorScheme.error),
             const SizedBox(height: 16),
             Text(
               'Failed to load requests',
@@ -154,7 +157,7 @@ class _PendingRequestsScreenState extends State<PendingRequestsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.inbox, size: 64, color: Colors.grey),
+            Icon(Icons.inbox, size: 64, color: colorScheme.onSurfaceVariant),
             const SizedBox(height: 16),
             Text(
               'No pending requests',
@@ -168,7 +171,7 @@ class _PendingRequestsScreenState extends State<PendingRequestsScreen> {
     }
 
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
       itemCount: _requests.length,
       itemBuilder: (context, index) {
         final requestData = _requests[index];
@@ -186,6 +189,7 @@ class _PendingRequestsScreenState extends State<PendingRequestsScreen> {
     String userName,
     String userEmail,
   ) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       child: Padding(
@@ -196,12 +200,12 @@ class _PendingRequestsScreenState extends State<PendingRequestsScreen> {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: Colors.blue.shade100,
+                  backgroundColor: colorScheme.secondaryContainer,
                   child: Text(
                     userName.isNotEmpty ? userName[0].toUpperCase() : '?',
                     style: TextStyle(
-                      color: Colors.blue.shade700,
-                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSecondaryContainer,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
@@ -214,13 +218,16 @@ class _PendingRequestsScreenState extends State<PendingRequestsScreen> {
                         userName,
                         style: const TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         userEmail,
-                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
                     ],
                   ),
@@ -233,8 +240,8 @@ class _PendingRequestsScreenState extends State<PendingRequestsScreen> {
                 'Message:',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey[600],
-                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(height: 4),
@@ -247,17 +254,21 @@ class _PendingRequestsScreenState extends State<PendingRequestsScreen> {
                 const SizedBox(width: 4),
                 Text(
                   _formatDate(request.createdAt),
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 const Spacer(),
-                ElevatedButton.icon(
+                FilledButton(
                   onPressed: () => _acceptRequest(request.id),
-                  icon: const Icon(Icons.check),
-                  label: const Text('Accept'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
+                  style: FilledButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
                   ),
+                  child: const Text('Accept'),
                 ),
               ],
             ),

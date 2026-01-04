@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:developer' as developer;
 import '../../models/user_model.dart';
 import '../../models/support_request_model.dart';
 import 'user_mood_summary_screen.dart';
@@ -41,8 +42,7 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
     });
 
     try {
-      // Debug: Print counsellor ID
-      print('DEBUG: Loading clients for counsellor: ${user.uid}');
+      developer.log('Loading clients for counsellor: ${user.uid}');
 
       // First, check ALL support requests for this counsellor (any status)
       final allRequestsSnapshot = await _firestore
@@ -50,12 +50,12 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
           .where('counsellorId', isEqualTo: user.uid)
           .get();
 
-      print(
-        'DEBUG: Total support requests for this counsellor (any status): ${allRequestsSnapshot.docs.length}',
+      developer.log(
+        'Total support requests for this counsellor (any status): ${allRequestsSnapshot.docs.length}',
       );
       for (var doc in allRequestsSnapshot.docs) {
-        print(
-          'DEBUG: Request ${doc.id}: status=${doc.data()['status']}, userId=${doc.data()['userId']}',
+        developer.log(
+          'Request ${doc.id}: status=${doc.data()['status']}, userId=${doc.data()['userId']}',
         );
       }
 
@@ -73,12 +73,12 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
           .get();
 
       // Debug: Print query results
-      print(
-        'DEBUG: Found ${requestsSnapshot.docs.length} accepted/inProgress requests',
+      developer.log(
+        'Found ${requestsSnapshot.docs.length} accepted/inProgress requests',
       );
       for (var doc in requestsSnapshot.docs) {
-        print(
-          'DEBUG: Request ${doc.id}: userId=${doc.data()['userId']}, status=${doc.data()['status']}',
+        developer.log(
+          'Request ${doc.id}: userId=${doc.data()['userId']}, status=${doc.data()['status']}',
         );
       }
 
@@ -87,10 +87,10 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
           .map((doc) => doc.data()['userId'] as String)
           .toSet();
 
-      print('DEBUG: Unique user IDs: $userIds');
+      developer.log('Unique user IDs: $userIds');
 
       if (userIds.isEmpty) {
-        print('DEBUG: No users found, showing empty state');
+        developer.log('No users found, showing empty state');
         setState(() {
           _assignedUsers = [];
           _isLoading = false;
@@ -110,14 +110,14 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
           .map((doc) => UserModel.fromFirestore(doc))
           .toList();
 
-      print('DEBUG: Loaded ${users.length} user details');
+      developer.log('Loaded ${users.length} user details');
 
       setState(() {
         _assignedUsers = users;
         _isLoading = false;
       });
     } catch (e) {
-      print('DEBUG: Error loading assigned users: $e');
+      developer.log('Error loading assigned users: $e');
       setState(() {
         _errorMessage = e.toString();
         _isLoading = false;
@@ -142,6 +142,7 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
   }
 
   Widget _buildBody() {
+    final colorScheme = Theme.of(context).colorScheme;
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -151,7 +152,7 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 64, color: Colors.red),
+            Icon(Icons.error_outline, size: 64, color: colorScheme.error),
             const SizedBox(height: 16),
             Text(
               'Failed to load clients',
@@ -160,7 +161,7 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
             const SizedBox(height: 8),
             Text(_errorMessage!),
             const SizedBox(height: 16),
-            ElevatedButton(
+            FilledButton.tonal(
               onPressed: _loadAssignedUsers,
               child: const Text('Retry'),
             ),
@@ -174,7 +175,11 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.people_outline, size: 64, color: Colors.grey),
+            Icon(
+              Icons.people_outline,
+              size: 64,
+              color: colorScheme.onSurfaceVariant,
+            ),
             const SizedBox(height: 16),
             Text(
               'No assigned clients',
@@ -190,7 +195,7 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
     return RefreshIndicator(
       onRefresh: _loadAssignedUsers,
       child: ListView.builder(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
         itemCount: _assignedUsers.length,
         itemBuilder: (context, index) {
           final user = _assignedUsers[index];
@@ -201,6 +206,7 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
   }
 
   Widget _buildUserCard(UserModel user) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       child: InkWell(
@@ -218,15 +224,13 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
             children: [
               CircleAvatar(
                 radius: 32,
-                backgroundColor: Theme.of(
-                  context,
-                ).primaryColor.withOpacity(0.1),
+                backgroundColor: colorScheme.primaryContainer,
                 child: Text(
                   user.name.isNotEmpty ? user.name[0].toUpperCase() : 'U',
                   style: TextStyle(
                     fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w700,
+                    color: colorScheme.onPrimaryContainer,
                   ),
                 ),
               ),
@@ -238,27 +242,27 @@ class _CounsellorDashboardScreenState extends State<CounsellorDashboardScreen> {
                     Text(
                       user.name,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       user.email,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Member since ${_formatDate(user.createdAt)}',
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodySmall?.copyWith(color: Colors.grey[500]),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: Colors.grey),
+              Icon(Icons.chevron_right, color: colorScheme.onSurfaceVariant),
             ],
           ),
         ),

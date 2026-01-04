@@ -62,34 +62,31 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
   }
 
   Color _getStatusColor(CounsellorStatus status) {
+    final colorScheme = Theme.of(context).colorScheme;
     switch (status) {
       case CounsellorStatus.available:
-        return Colors.green;
+        return colorScheme.tertiary;
       case CounsellorStatus.busy:
-        return Colors.orange;
+        return colorScheme.secondary;
       case CounsellorStatus.offline:
-        return Colors.grey;
+        return colorScheme.onSurfaceVariant;
     }
   }
 
   Future<void> _submitSupportRequest() async {
+    final colorScheme = Theme.of(context).colorScheme;
+
     if (_messageController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please enter a message'),
-          backgroundColor: Colors.orange,
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Please enter a message')));
       return;
     }
 
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please log in to request support'),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text('Please sign in to request support')),
       );
       return;
     }
@@ -107,10 +104,7 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Support request submitted successfully!'),
-            backgroundColor: Colors.green,
-          ),
+          const SnackBar(content: Text('Support request submitted.')),
         );
         Navigator.pop(context);
       }
@@ -119,7 +113,7 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Failed to submit request: ${e.toString()}'),
-            backgroundColor: Colors.red,
+            backgroundColor: colorScheme.error,
           ),
         );
       }
@@ -134,8 +128,10 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Counsellor Details')),
+      appBar: AppBar(title: const Text('Counsellor')),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -143,16 +139,12 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
             // Header Section with Profile
             Container(
               padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withOpacity(0.05),
-              ),
+              decoration: BoxDecoration(color: colorScheme.surfaceContainerLow),
               child: Column(
                 children: [
                   CircleAvatar(
                     radius: 56,
-                    backgroundColor: Theme.of(
-                      context,
-                    ).primaryColor.withOpacity(0.1),
+                    backgroundColor: colorScheme.primaryContainer,
                     backgroundImage: widget.counsellor.profileImageUrl != null
                         ? NetworkImage(widget.counsellor.profileImageUrl!)
                         : null,
@@ -163,8 +155,8 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
                                 : '?',
                             style: TextStyle(
                               fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.w800,
+                              color: colorScheme.onPrimaryContainer,
                             ),
                           )
                         : null,
@@ -173,7 +165,7 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
                   Text(
                     widget.counsellor.name,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w800,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -182,7 +174,7 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
                     Text(
                       widget.counsellor.specialization!,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Colors.grey[600],
+                        color: colorScheme.onSurfaceVariant,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -196,7 +188,7 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
                     decoration: BoxDecoration(
                       color: _getStatusColor(
                         widget.counsellor.status,
-                      ).withOpacity(0.1),
+                      ).withAlpha(26),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
                         color: _getStatusColor(widget.counsellor.status),
@@ -208,7 +200,7 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
                       style: TextStyle(
                         fontSize: 14,
                         color: _getStatusColor(widget.counsellor.status),
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
@@ -218,7 +210,7 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
 
             // Details Section
             Padding(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -260,19 +252,25 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.orange.withOpacity(0.1),
+                        color: colorScheme.secondaryContainer,
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.orange, width: 1),
+                        border: Border.all(
+                          color: colorScheme.outlineVariant,
+                          width: 1,
+                        ),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.info_outline, color: Colors.orange),
+                          Icon(
+                            Icons.info_outline,
+                            color: colorScheme.onSecondaryContainer,
+                          ),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Text(
                               'You already have a pending support request. Please wait for a response.',
                               style: TextStyle(
-                                color: Colors.orange[900],
+                                color: colorScheme.onSecondaryContainer,
                                 fontSize: 14,
                               ),
                             ),
@@ -287,58 +285,38 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
                         Text(
                           'Request Support',
                           style: Theme.of(context).textTheme.titleLarge
-                              ?.copyWith(fontWeight: FontWeight.bold),
+                              ?.copyWith(fontWeight: FontWeight.w700),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           'Describe your situation and how this counsellor can help you.',
                           style: Theme.of(context).textTheme.bodyMedium
-                              ?.copyWith(color: Colors.grey[600]),
+                              ?.copyWith(color: colorScheme.onSurfaceVariant),
                         ),
                         const SizedBox(height: 16),
                         TextField(
                           controller: _messageController,
                           maxLines: 5,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'Tell us how we can help...',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            filled: true,
-                            fillColor: Colors.grey[50],
                           ),
                         ),
                         const SizedBox(height: 16),
                         SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton(
+                          child: FilledButton(
                             onPressed: _isSubmitting
                                 ? null
                                 : _submitSupportRequest,
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
                             child: _isSubmitting
                                 ? const SizedBox(
                                     height: 20,
                                     width: 20,
                                     child: CircularProgressIndicator(
                                       strokeWidth: 2,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.white,
-                                      ),
                                     ),
                                   )
-                                : const Text(
-                                    'Submit Request',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                                : const Text('Submit request'),
                           ),
                         ),
                       ],
@@ -357,10 +335,11 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
     required String title,
     required String value,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 24, color: Colors.grey[600]),
+        Icon(icon, size: 22, color: colorScheme.onSurfaceVariant),
         const SizedBox(width: 12),
         Expanded(
           child: Column(
@@ -370,8 +349,8 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
                 title,
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey[600],
-                  fontWeight: FontWeight.w500,
+                  color: colorScheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 4),
@@ -379,7 +358,7 @@ class _CounsellorDetailScreenState extends State<CounsellorDetailScreen> {
                 value,
                 style: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],

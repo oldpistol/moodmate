@@ -14,11 +14,11 @@ class MoodEntryDetailScreen extends StatefulWidget {
 class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mood Entry Details'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Mood entry')),
       body: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
             .collection('mood_entries')
@@ -30,7 +30,7 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
+                  Icon(Icons.error_outline, size: 64, color: colorScheme.error),
                   const SizedBox(height: 16),
                   Text(
                     'Error loading entry',
@@ -39,7 +39,7 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
                   const SizedBox(height: 8),
                   Text(
                     snapshot.error.toString(),
-                    style: TextStyle(color: Colors.grey[600]),
+                    style: TextStyle(color: colorScheme.onSurfaceVariant),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -56,7 +56,11 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.search_off, size: 64, color: Colors.grey[400]),
+                  Icon(
+                    Icons.search_off,
+                    size: 64,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                   const SizedBox(height: 16),
                   Text(
                     'Entry not found',
@@ -72,7 +76,7 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
           );
 
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -92,12 +96,13 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
   }
 
   Widget _buildDateCard(MoodEntry entry) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            Icon(Icons.calendar_today, color: Colors.deepPurple[700]),
+            Icon(Icons.calendar_today, color: colorScheme.primary),
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,12 +111,15 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
                   _formatDate(entry.date),
                   style: const TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 Text(
                   _formatTime(entry.timestamp),
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ],
             ),
@@ -122,6 +130,7 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
   }
 
   Widget _buildMoodTextCard(MoodEntry entry) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -130,11 +139,11 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.edit_note, color: Colors.blue[700]),
+                Icon(Icons.edit_note, color: colorScheme.secondary),
                 const SizedBox(width: 8),
                 const Text(
                   'Your Journal Entry',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                 ),
               ],
             ),
@@ -147,9 +156,10 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
   }
 
   Widget _buildAnalysisCard(MoodEntry entry) {
+    final colorScheme = Theme.of(context).colorScheme;
     if (entry.analysisStatus == 'pending') {
       return Card(
-        color: Colors.blue[50],
+        color: colorScheme.secondaryContainer,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
@@ -159,7 +169,9 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
                 height: 24,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[700]!),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    colorScheme.onSecondaryContainer,
+                  ),
                 ),
               ),
               const SizedBox(width: 12),
@@ -177,7 +189,7 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
 
     if (entry.analysisStatus == 'failed') {
       return Card(
-        color: Colors.red[50],
+        color: colorScheme.errorContainer,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -185,14 +197,17 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.error_outline, color: Colors.red[700]),
+                  Icon(
+                    Icons.error_outline,
+                    color: colorScheme.onErrorContainer,
+                  ),
                   const SizedBox(width: 12),
                   const Expanded(
                     child: Text(
                       'Analysis failed',
                       style: TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
@@ -201,7 +216,10 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
               const SizedBox(height: 8),
               Text(
                 'We couldn\'t analyze this entry. Please try again later.',
-                style: TextStyle(fontSize: 13, color: Colors.grey[700]),
+                style: TextStyle(
+                  fontSize: 13,
+                  color: colorScheme.onErrorContainer,
+                ),
               ),
             ],
           ),
@@ -214,7 +232,7 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
     }
 
     return Card(
-      color: _getEmotionColor(entry.emotion!).withOpacity(0.1),
+      color: _getEmotionColor(entry.emotion!).withAlpha(26),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -229,7 +247,7 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
                 const SizedBox(width: 8),
                 const Text(
                   'Detected Emotion',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                 ),
               ],
             ),
@@ -238,7 +256,7 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
               _capitalizeFirst(entry.emotion!),
               style: TextStyle(
                 fontSize: 24,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w800,
                 color: _getEmotionColor(entry.emotion!),
               ),
             ),
@@ -248,15 +266,14 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
                 children: [
                   Text(
                     'Confidence: ',
-                    style: TextStyle(fontSize: 13, color: Colors.grey[700]),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   Text(
                     '${(entry.confidenceScore! * 100).toStringAsFixed(0)}%',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[800],
-                    ),
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
@@ -268,6 +285,7 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
   }
 
   Widget _buildRecommendationsCard(MoodEntry entry) {
+    final colorScheme = Theme.of(context).colorScheme;
     if (entry.analysisStatus != 'completed' ||
         entry.recommendations == null ||
         entry.recommendations!.isEmpty) {
@@ -275,7 +293,7 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
     }
 
     return Card(
-      color: Colors.green[50],
+      color: colorScheme.tertiaryContainer,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -283,11 +301,11 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.lightbulb, color: Colors.amber[700]),
+                Icon(Icons.lightbulb, color: colorScheme.tertiary),
                 const SizedBox(width: 8),
                 const Text(
                   'Personalized Recommendations',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                 ),
               ],
             ),
@@ -302,16 +320,16 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
                       width: 24,
                       height: 24,
                       decoration: BoxDecoration(
-                        color: Colors.green[600],
+                        color: colorScheme.onTertiaryContainer,
                         shape: BoxShape.circle,
                       ),
                       child: Center(
                         child: Text(
                           '${e.key + 1}',
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: colorScheme.tertiaryContainer,
                             fontSize: 12,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
@@ -326,23 +344,30 @@ class _MoodEntryDetailScreenState extends State<MoodEntryDetailScreen> {
                   ],
                 ),
               );
-            }).toList(),
+            }),
             const SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.green[200]!),
+                border: Border.all(color: colorScheme.outlineVariant),
               ),
               child: Row(
                 children: [
-                  Icon(Icons.info_outline, size: 18, color: Colors.green[700]),
+                  Icon(
+                    Icons.info_outline,
+                    size: 18,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       'These personalized suggestions are based on your mood entry.',
-                      style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ),
                 ],

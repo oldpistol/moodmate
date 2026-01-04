@@ -110,7 +110,7 @@ class _MoodEntryScreenState extends State<MoodEntryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Daily Mood Entry'), centerTitle: true),
+      appBar: AppBar(title: const Text('Daily mood entry')),
       body: _isCheckingEntry
           ? const Center(child: CircularProgressIndicator())
           : _hasEntryToday
@@ -120,22 +120,25 @@ class _MoodEntryScreenState extends State<MoodEntryScreen> {
   }
 
   Widget _buildAlreadySubmittedView() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.1),
+                color: colorScheme.secondaryContainer,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.check_circle,
                 size: 80,
-                color: Colors.green[600],
+                color: colorScheme.onSecondaryContainer,
               ),
             ),
             const SizedBox(height: 24),
@@ -143,27 +146,20 @@ class _MoodEntryScreenState extends State<MoodEntryScreen> {
               'Already Submitted',
               style: Theme.of(
                 context,
-              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 12),
             Text(
               'You\'ve already made a mood entry today. Come back tomorrow to track your mood again!',
               textAlign: TextAlign.center,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
             ),
             const SizedBox(height: 32),
-            ElevatedButton.icon(
+            FilledButton.tonal(
               onPressed: () => Navigator.of(context).pop(),
-              icon: const Icon(Icons.arrow_back),
-              label: const Text('Back to Home'),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
-                ),
-              ),
+              child: const Text('Back to home'),
             ),
           ],
         ),
@@ -172,8 +168,11 @@ class _MoodEntryScreenState extends State<MoodEntryScreen> {
   }
 
   Widget _buildMoodEntryForm() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
       child: Form(
         key: _formKey,
         child: Column(
@@ -181,20 +180,21 @@ class _MoodEntryScreenState extends State<MoodEntryScreen> {
           children: [
             // Info card
             Card(
-              elevation: 2,
-              color: Colors.deepPurple.withOpacity(0.1),
+              color: colorScheme.primaryContainer,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    Icon(Icons.info_outline, color: Colors.deepPurple[700]),
+                    Icon(
+                      Icons.info_outline,
+                      color: colorScheme.onPrimaryContainer,
+                    ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         'Share how you\'re feeling today. Our AI will analyze your entry and provide insights.',
-                        style: TextStyle(
-                          color: Colors.deepPurple[700],
-                          fontSize: 14,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: colorScheme.onPrimaryContainer,
                         ),
                       ),
                     ),
@@ -209,14 +209,14 @@ class _MoodEntryScreenState extends State<MoodEntryScreen> {
               'Today\'s Entry',
               style: Theme.of(
                 context,
-              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
             Text(
               _formatDate(DateTime.now()),
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
             ),
             const SizedBox(height: 24),
 
@@ -246,7 +246,6 @@ class _MoodEntryScreenState extends State<MoodEntryScreen> {
 
             // Tips card
             Card(
-              elevation: 1,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -256,14 +255,14 @@ class _MoodEntryScreenState extends State<MoodEntryScreen> {
                       children: [
                         Icon(
                           Icons.lightbulb_outline,
-                          color: Colors.amber[700],
+                          color: colorScheme.tertiary,
                           size: 20,
                         ),
                         const SizedBox(width: 8),
                         Text(
                           'Tips for a good entry',
                           style: Theme.of(context).textTheme.titleSmall
-                              ?.copyWith(fontWeight: FontWeight.bold),
+                              ?.copyWith(fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -281,32 +280,15 @@ class _MoodEntryScreenState extends State<MoodEntryScreen> {
             // Submit button
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
+              child: FilledButton(
                 onPressed: _isSubmitting ? null : _submitMoodEntry,
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
                 child: _isSubmitting
                     ? const SizedBox(
                         height: 20,
                         width: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.white,
-                          ),
-                        ),
+                        child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : const Text(
-                        'Submit Entry',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    : const Text('Submit entry'),
               ),
             ),
           ],
@@ -316,11 +298,12 @@ class _MoodEntryScreenState extends State<MoodEntryScreen> {
   }
 
   Widget _buildTip(String text) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
         children: [
-          Icon(Icons.check_circle, size: 16, color: Colors.green[600]),
+          Icon(Icons.check_circle, size: 16, color: colorScheme.secondary),
           const SizedBox(width: 8),
           Expanded(
             child: Text(text, style: Theme.of(context).textTheme.bodySmall),
