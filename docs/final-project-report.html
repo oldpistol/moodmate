@@ -1,0 +1,2099 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>MoodMate - Final Project Report</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="formal-style.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">MoodMate - Final Project Report</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#moodmate---final-project-report"
+id="toc-moodmate---final-project-report">MoodMate - Final Project
+Report</a>
+<ul>
+<li><a href="#table-of-contents" id="toc-table-of-contents">Table of
+Contents</a></li>
+<li><a href="#executive-summary" id="toc-executive-summary">1. Executive
+Summary</a></li>
+<li><a href="#stakeholders-and-users" id="toc-stakeholders-and-users">2.
+Stakeholders and Users</a></li>
+<li><a href="#uml-use-case-diagram" id="toc-uml-use-case-diagram">3. UML
+Use Case Diagram</a></li>
+<li><a href="#system-flow-and-navigation-structure"
+id="toc-system-flow-and-navigation-structure">4. System Flow and
+Navigation Structure</a></li>
+<li><a href="#low-fidelity-ui-design" id="toc-low-fidelity-ui-design">5.
+Low-Fidelity UI Design</a></li>
+<li><a href="#high-fidelity-ui-design"
+id="toc-high-fidelity-ui-design">6. High-Fidelity UI Design</a></li>
+<li><a href="#design-rationale-and-alignment-with-user-needs"
+id="toc-design-rationale-and-alignment-with-user-needs">7. Design
+Rationale and Alignment with User Needs</a></li>
+<li><a href="#technical-implementation"
+id="toc-technical-implementation">8. Technical Implementation</a></li>
+<li><a href="#conclusion" id="toc-conclusion">9. Conclusion</a></li>
+<li><a href="#appendices" id="toc-appendices">Appendices</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="moodmate---final-project-report">MoodMate - Final Project
+Report</h1>
+<p><strong>AI-Powered Mental Wellness Companion</strong></p>
+<p><strong>Project Duration:</strong> January 2026 - February 2026<br />
+<strong>Team:</strong> Mobile Application Development<br />
+<strong>Document Version:</strong> 1.0<br />
+<strong>Last Updated:</strong> February 4, 2026</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol type="1">
+<li><a href="#1-executive-summary">Executive Summary</a></li>
+<li><a href="#2-stakeholders-and-users">Stakeholders and Users</a></li>
+<li><a href="#3-uml-use-case-diagram">UML Use Case Diagram</a></li>
+<li><a href="#4-system-flow-and-navigation-structure">System Flow and
+Navigation Structure</a></li>
+<li><a href="#5-low-fidelity-ui-design">Low-Fidelity UI Design</a></li>
+<li><a href="#6-high-fidelity-ui-design">High-Fidelity UI
+Design</a></li>
+<li><a href="#7-design-rationale-and-alignment-with-user-needs">Design
+Rationale and Alignment with User Needs</a></li>
+<li><a href="#8-technical-implementation">Technical
+Implementation</a></li>
+<li><a href="#9-conclusion">Conclusion</a></li>
+</ol>
+<hr />
+<h2 id="executive-summary">1. Executive Summary</h2>
+<p>MoodMate is a cross-platform mobile application designed to help
+individuals track, understand, and improve their emotional well-being
+through AI-powered mood analysis. The application addresses the growing
+need for accessible mental health support by combining intelligent mood
+tracking with professional counsellor access.</p>
+<h3 id="key-features-delivered">Key Features Delivered</h3>
+<ul>
+<li><strong>AI-Powered Mood Analysis:</strong> Automatic emotion
+detection using natural language processing (Mistral AI/OpenAI)</li>
+<li><strong>Personalized Recommendations:</strong> Context-aware
+suggestions based on detected emotional states</li>
+<li><strong>Mood Trend Visualization:</strong> Interactive charts
+displaying emotional patterns over time</li>
+<li><strong>Professional Support Integration:</strong> Direct messaging
+with licensed counsellors</li>
+<li><strong>Cross-Platform Availability:</strong> Supports iOS, Android,
+and Web platforms</li>
+<li><strong>Secure Data Management:</strong> Role-based access control
+with Firebase security</li>
+</ul>
+<h3 id="project-impact">Project Impact</h3>
+<p>MoodMate successfully delivers a comprehensive mental wellness
+solution that empowers users to:</p>
+<ul>
+<li>Gain deeper self-awareness of emotional patterns</li>
+<li>Receive timely, personalized support and recommendations</li>
+<li>Access professional counselling when needed</li>
+<li>Track progress and identify triggers through visual analytics</li>
+</ul>
+<hr />
+<h2 id="stakeholders-and-users">2. Stakeholders and Users</h2>
+<h3 id="primary-stakeholders">2.1 Primary Stakeholders</h3>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 16%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr>
+<th>Stakeholder</th>
+<th>Role</th>
+<th>Interest</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>End Users</strong></td>
+<td>Primary beneficiaries</td>
+<td>Seeking tools for emotional self-awareness and mental wellness
+tracking</td>
+</tr>
+<tr>
+<td><strong>Mental Health Professionals</strong></td>
+<td>Service providers</td>
+<td>Platform to extend reach and provide remote support to clients</td>
+</tr>
+<tr>
+<td><strong>Healthcare Organizations</strong></td>
+<td>Potential sponsors</td>
+<td>Interest in digital mental health solutions for employee wellness
+programs</td>
+</tr>
+<tr>
+<td><strong>Development Team</strong></td>
+<td>Implementation</td>
+<td>Building and maintaining the application</td>
+</tr>
+<tr>
+<td><strong>Project Sponsors</strong></td>
+<td>Funding</td>
+<td>Return on investment and market viability</td>
+</tr>
+</tbody>
+</table>
+<h3 id="user-categories-and-profiles">2.2 User Categories and
+Profiles</h3>
+<h4 id="user-category-1-general-users-individuals">User Category 1:
+General Users (Individuals)</h4>
+<p><strong>Demographics:</strong></p>
+<ul>
+<li><strong>Age Range:</strong> 18-45 years</li>
+<li><strong>Tech Proficiency:</strong> Comfortable with mobile
+applications</li>
+<li><strong>Context:</strong> Professionals, students, or individuals
+interested in mental wellness</li>
+</ul>
+<p><strong>Primary Needs:</strong></p>
+<ol type="1">
+<li><strong>Self-Awareness:</strong> Tools to recognize and understand
+emotional patterns</li>
+<li><strong>Quick Journaling:</strong> Simple, fast method to log daily
+feelings without complex interfaces</li>
+<li><strong>Actionable Insights:</strong> Meaningful feedback rather
+than raw data</li>
+<li><strong>Visual Trends:</strong> Easy-to-understand charts showing
+mood patterns over time</li>
+<li><strong>Privacy Assurance:</strong> Confidence that personal
+emotional data is secure</li>
+<li><strong>Professional Access:</strong> Option to reach out to
+counsellors when needed</li>
+</ol>
+<p><strong>User Goals:</strong></p>
+<ul>
+<li>Log daily emotions in under 2 minutes</li>
+<li>Understand what triggers positive or negative emotional states</li>
+<li>Receive helpful tips to improve mood</li>
+<li>Track emotional progress over weeks and months</li>
+<li>Connect with professional support during difficult periods</li>
+</ul>
+<p><strong>Pain Points Addressed:</strong></p>
+<ul>
+<li>Lack of insight into emotional patterns</li>
+<li>Difficulty identifying triggers for mood changes</li>
+<li>Limited access to affordable mental health support</li>
+<li>Inconsistent mood tracking habits due to lack of engagement</li>
+<li>Privacy concerns with digital mental health tools</li>
+</ul>
+<p><strong>Persona Example: Maya (28, Marketing
+Professional)</strong></p>
+<blockquote>
+<p>Maya experiences work-related stress and struggles to identify what
+specifically triggers her anxiety. She tried paper journaling but found
+it time-consuming and difficult to spot patterns. She values data
+visualization and wants actionable suggestions she can implement
+immediately. Maya needs a tool that respects her privacy while providing
+intelligent analysis without requiring lengthy entries.</p>
+</blockquote>
+<hr />
+<h4 id="user-category-2-mental-health-counsellors">User Category 2:
+Mental Health Counsellors</h4>
+<p><strong>Demographics:</strong></p>
+<ul>
+<li><strong>Professional Status:</strong> Licensed therapists,
+counsellors, or mental health practitioners</li>
+<li><strong>Experience Level:</strong> 3-20 years in practice</li>
+<li><strong>Practice Setting:</strong> Private practice, clinics, or
+digital health platforms</li>
+</ul>
+<p><strong>Primary Needs:</strong></p>
+<ol type="1">
+<li><strong>Client Overview:</strong> Quick access to client emotional
+patterns before sessions</li>
+<li><strong>Efficient Communication:</strong> Secure messaging channel
+with clients between appointments</li>
+<li><strong>Progress Tracking:</strong> Tools to monitor client
+well-being over time</li>
+<li><strong>Consent-Based Access:</strong> Ethical access to client data
+with proper permissions</li>
+<li><strong>Time Management:</strong> Efficient dashboard to manage
+multiple client relationships</li>
+<li><strong>Professional Security:</strong> HIPAA-aware data handling
+practices</li>
+</ol>
+<p><strong>User Goals:</strong></p>
+<ul>
+<li>View comprehensive mood summaries for assigned clients</li>
+<li>Respond to client messages in a timely manner</li>
+<li>Identify clients who may need immediate attention</li>
+<li>Track treatment progress through objective mood data</li>
+<li>Maintain professional boundaries with secure communication</li>
+</ul>
+<p><strong>Pain Points Addressed:</strong></p>
+<ul>
+<li>Limited visibility into client emotional state between sessions</li>
+<li>Difficulty tracking client progress objectively</li>
+<li>Inefficient communication methods (email, phone calls)</li>
+<li>Lack of tools for remote client monitoring</li>
+<li>Concerns about data security and confidentiality</li>
+</ul>
+<p><strong>Persona Example: Dr. James (42, Licensed
+Therapist)</strong></p>
+<blockquote>
+<p>Dr. James manages 15-20 clients remotely and in-person. He finds it
+challenging to stay informed about client emotional states between
+weekly sessions. He needs efficient tools to identify when clients are
+struggling and to provide timely support. Dr. James values comprehensive
+mood summaries that help him prepare for sessions and track treatment
+effectiveness over time.</p>
+</blockquote>
+<hr />
+<h4 id="user-category-3-system-administrators-secondary">User Category
+3: System Administrators (Secondary)</h4>
+<p><strong>Role:</strong> Application management and user support</p>
+<p><strong>Primary Needs:</strong></p>
+<ol type="1">
+<li>Monitor system health and user activity</li>
+<li>Manage user roles and permissions</li>
+<li>Handle technical support requests</li>
+<li>Ensure compliance with security standards</li>
+</ol>
+<hr />
+<h3 id="user-needs-matrix">2.3 User Needs Matrix</h3>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 25%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr>
+<th>User Type</th>
+<th>Critical Needs</th>
+<th>Features Addressing Needs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>General Users</strong></td>
+<td>Quick mood logging</td>
+<td>Simple text-based journaling interface</td>
+</tr>
+<tr>
+<td></td>
+<td>Pattern recognition</td>
+<td>AI-powered mood analysis</td>
+</tr>
+<tr>
+<td></td>
+<td>Actionable guidance</td>
+<td>Personalized recommendations</td>
+</tr>
+<tr>
+<td></td>
+<td>Visual insights</td>
+<td>Interactive mood trend charts</td>
+</tr>
+<tr>
+<td></td>
+<td>Privacy &amp; security</td>
+<td>Firebase authentication + encryption</td>
+</tr>
+<tr>
+<td></td>
+<td>Professional support</td>
+<td>Counsellor contact system</td>
+</tr>
+<tr>
+<td><strong>Counsellors</strong></td>
+<td>Client overviews</td>
+<td>Mood summary dashboard</td>
+</tr>
+<tr>
+<td></td>
+<td>Secure messaging</td>
+<td>Real-time chat with end-to-end security</td>
+</tr>
+<tr>
+<td></td>
+<td>Progress monitoring</td>
+<td>Historical mood trend access</td>
+</tr>
+<tr>
+<td></td>
+<td>Client management</td>
+<td>Assignment and request tracking system</td>
+</tr>
+<tr>
+<td></td>
+<td>Professional tools</td>
+<td>Role-based access with consent mechanisms</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="uml-use-case-diagram">3. UML Use Case Diagram</h2>
+<h3 id="actor-definitions">3.1 Actor Definitions</h3>
+<pre><code>┌──────────────────┐
+│   General User   │  → Individual seeking emotional wellness tracking
+└──────────────────┘
+
+┌──────────────────┐
+│   Counsellor     │  → Mental health professional providing support
+└──────────────────┘
+
+┌──────────────────┐
+│   System (AI)    │  → Automated mood analysis and recommendation engine
+└──────────────────┘</code></pre>
+<h3 id="use-case-diagram">3.2 Use Case Diagram</h3>
+<pre><code>                            ┌─────────────────────────────────────────┐
+                            │         MoodMate System                 │
+                            │                                         │
+                            │  ┌────────────────────────────────┐    │
+     ┌──────────┐           │  │     UC-01: Register Account    │    │
+     │          │───────────┼─→│                                │    │
+     │          │           │  └────────────────────────────────┘    │
+     │          │           │                                         │
+     │          │           │  ┌────────────────────────────────┐    │
+     │  General │───────────┼─→│     UC-02: Login               │←───┼───────┐
+     │   User   │           │  └────────────────────────────────┘    │       │
+     │          │           │                                         │       │
+     │          │           │  ┌────────────────────────────────┐    │       │
+     │          │───────────┼─→│  UC-03: Record Daily Mood      │    │       │
+     │          │           │  │         (Text Journal)          │    │       │
+     │          │           │  └────────┬───────────────────────┘    │       │
+     │          │           │           │                            │       │
+     │          │           │           │ &lt;&lt;include&gt;&gt;                │       │
+     │          │           │           ▼                            │       │
+     │          │           │  ┌────────────────────────────────┐    │       │
+     │          │           │  │  UC-04: AI Mood Analysis       │◄───┼───┐   │
+     │          │           │  │         (NLP)                  │    │   │   │
+     │          │           │  └────────┬───────────────────────┘    │   │   │
+     │          │           │           │                            │   │   │
+     │          │           │           │ &lt;&lt;extend&gt;&gt;                 │   │   │
+     │          │           │           ▼                            │   │   │
+     └──────────┘           │  ┌────────────────────────────────┐    │   │   │
+                            │  │ UC-05: Generate                │    │   │   │
+                            │  │       Recommendations          │    │   │   │
+     ┌──────────┐           │  └────────────────────────────────┘    │   │   │
+     │          │           │                                         │   │   │
+     │          │           │  ┌────────────────────────────────┐    │   │   │
+     │  General │───────────┼─→│ UC-06: View Mood History       │    │   │   │
+     │   User   │           │  │        &amp; Trends                │    │   │   │
+     │          │           │  └────────────────────────────────┘    │   │   │
+     │          │           │                                         │   │   │
+     │          │           │  ┌────────────────────────────────┐    │   │   │
+     │          │───────────┼─→│ UC-07: Contact Counsellor      │    │   │   │
+     │          │           │  │                                │    │   │   │
+     └──────────┘           │  └────────────────────────────────┘    │   │   │
+                            │                                         │   │   │
+                            │  ┌────────────────────────────────┐    │   │   │
+     ┌──────────┐           │  │ UC-08: View User Mood          │    │   │   │
+     │          │───────────┼─→│        Summary                 │    │   │   │
+     │          │           │  │                                │    │   │   │
+     │          │           │  └────────────────────────────────┘    │   │   │
+     │Counsellor│           │                                         │   │   │
+     │          │           │  ┌────────────────────────────────┐    │   │   │
+     │          │───────────┼─→│ UC-09: Provide Advice          │    │   │   │
+     │          │           │  │        to User                 │    │   │   │
+     │          │           │  └────────────────────────────────┘    │   │   │
+     └──────────┘           │                                         │   │   │
+                            │  ┌────────────────────────────────┐    │   │   │
+                            │  │ UC-10: Privacy &amp; Data          │    │   │   │
+     ┌──────────┐           │  │        Protection              │    │   │   │
+     │          │◄──────────┼──│                                │    │   │   │
+     │ System   │           │  └────────────────────────────────┘    │   │   │
+     │  (AI)    │───────────┼─────────────────────────────────────────────┘   │
+     │          │           │                                                 │
+     └──────────┘           └─────────────────────────────────────────────────┘
+                                                         ▲
+                                                         │
+                                                         │
+                                                ┌────────┴────────┐
+                                                │ Counsellor      │
+                                                │     Login       │
+                                                └─────────────────┘</code></pre>
+<h3 id="use-case-summary-table">3.3 Use Case Summary Table</h3>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 27%" />
+<col style="width: 15%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr>
+<th>UC ID</th>
+<th>Use Case Name</th>
+<th>Primary Actor</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UC-01</td>
+<td>Register Account</td>
+<td>General User</td>
+<td>Create new account to access MoodMate</td>
+</tr>
+<tr>
+<td>UC-02</td>
+<td>Login</td>
+<td>User/Counsellor</td>
+<td>Authenticate and access the system</td>
+</tr>
+<tr>
+<td>UC-03</td>
+<td>Record Daily Mood</td>
+<td>General User</td>
+<td>Log emotional state via text journal entry</td>
+</tr>
+<tr>
+<td>UC-04</td>
+<td>AI Mood Analysis</td>
+<td>System (AI)</td>
+<td>Automatically analyze mood from journal text</td>
+</tr>
+<tr>
+<td>UC-05</td>
+<td>Generate Recommendations</td>
+<td>System (AI)</td>
+<td>Provide personalized tips based on detected mood</td>
+</tr>
+<tr>
+<td>UC-06</td>
+<td>View Mood History &amp; Trends</td>
+<td>General User</td>
+<td>Access historical mood data with visualizations</td>
+</tr>
+<tr>
+<td>UC-07</td>
+<td>Contact Counsellor</td>
+<td>General User</td>
+<td>Request support from mental health professional</td>
+</tr>
+<tr>
+<td>UC-08</td>
+<td>View User Mood Summary</td>
+<td>Counsellor</td>
+<td>Review client emotional patterns and history</td>
+</tr>
+<tr>
+<td>UC-09</td>
+<td>Provide Advice to User</td>
+<td>Counsellor</td>
+<td>Send professional guidance via secure messaging</td>
+</tr>
+<tr>
+<td>UC-10</td>
+<td>Privacy &amp; Data Protection</td>
+<td>System</td>
+<td>Ensure emotional data security and access control</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="system-flow-and-navigation-structure">4. System Flow and
+Navigation Structure</h2>
+<h3 id="overall-system-architecture-flow">4.1 Overall System
+Architecture Flow</h3>
+<pre><code>┌───────────────────────────────────────────────────────────────────────┐
+│                         User Entry Point                              │
+│                     (Mobile App / Web App)                            │
+└───────────────────┬───────────────────────────────────────────────────┘
+                    │
+                    ▼
+┌───────────────────────────────────────────────────────────────────────┐
+│                    Firebase Authentication                            │
+│                  (Email/Password + Session)                           │
+└───────────┬────────────────────────┬──────────────────────────────────┘
+            │                        │
+            ▼                        ▼
+    ┌───────────────┐      ┌─────────────────┐
+    │  User Role    │      │ Counsellor Role │
+    │   Detected    │      │    Detected     │
+    └───────┬───────┘      └────────┬────────┘
+            │                       │
+            ▼                       ▼
+┌─────────────────────┐   ┌─────────────────────────┐
+│   User Dashboard    │   │  Counsellor Dashboard   │
+│   - Mood Entry      │   │  - Assigned Users       │
+│   - History         │   │  - Mood Summaries       │
+│   - Trends          │   │  - Messages             │
+│   - Counsellor      │   │  - Support Requests     │
+└──────┬──────────────┘   └───────┬─────────────────┘
+       │                          │
+       ▼                          ▼
+┌─────────────────────────────────────────────┐
+│         Cloud Firestore Database            │
+│  - mood_entries                             │
+│  - users                                    │
+│  - messages                                 │
+│  - counsellors                              │
+│  - support_requests                         │
+│  - counsellor_assignments                   │
+└──────────────┬──────────────────────────────┘
+               │
+               ▼
+┌──────────────────────────────────────────────┐
+│     Firebase Cloud Functions                 │
+│  - analyzeMood (Mistral AI/OpenAI)          │
+│  - generateRecommendations                   │
+│  - sendNotifications (FCM)                   │
+└──────────────────────────────────────────────┘</code></pre>
+<h3 id="user-navigation-flow-general-user">4.2 User Navigation Flow
+(General User)</h3>
+<pre><code>                        ┌─────────────┐
+                        │  App Launch │
+                        └──────┬──────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │  Auth Check         │
+                    │  (Logged In?)       │
+                    └─────┬──────┬────────┘
+                          │      │
+                    No    │      │ Yes
+                    ┌─────▼──┐   │
+                    │ Login/ │   │
+                    │Register│   │
+                    └─────┬──┘   │
+                          │      │
+                          └──────▼──────────────────┐
+                          │                         │
+                    ┌─────▼──────────┐              │
+                    │  Home Screen   │              │
+                    │  - Quick Stats │              │
+                    │  - Today Entry │              │
+                    └─┬──┬───┬───┬───┘              │
+                      │  │   │   │                  │
+        ┌─────────────┘  │   │   └─────────────┐    │
+        │                │   │                 │    │
+        ▼                ▼   ▼                 ▼    │
+┌──────────────┐ ┌──────────┐ ┌──────────┐ ┌────────────┐
+│  New Mood    │ │  Mood    │ │  Mood    │ │ Counsellor │
+│   Entry      │ │ History  │ │  Trends  │ │  Contact   │
+└──────┬───────┘ └────┬─────┘ └────┬─────┘ └──────┬─────┘
+       │              │            │              │
+       │              │            │              │
+┌──────▼──────────┐   │            │      ┌───────▼──────────┐
+│ Text Journal    │   │            │      │  Counsellor List │
+│ Input Screen    │   │            │      └───────┬──────────┘
+└──────┬──────────┘   │            │              │
+       │              │            │              │
+       │ Submit       │            │      ┌───────▼──────────┐
+       │              │            │      │  Request Support │
+┌──────▼──────────┐   │            │      └───────┬──────────┘
+│ AI Analysis     │   │            │              │
+│ Processing      │   │            │      ┌───────▼──────────┐
+└──────┬──────────┘   │            │      │  Chat/Messages   │
+       │              │            │      └──────────────────┘
+┌──────▼───────────┐  │            │
+│ Analysis Result  │  │            │
+│ + Recommendations│  │            │
+└──────────────────┘  │            │
+                      │            │
+              ┌───────▼────────┐   │
+              │  Entry List    │   │
+              │  - Filter      │   │
+              │  - Search      │   │
+              └───┬────────────┘   │
+                  │                │
+          ┌───────▼────────┐       │
+          │ Entry Detail   │       │
+          │ - Full Text    │       │
+          │ - AI Results   │       │
+          │ - Edit/Delete  │       │
+          └────────────────┘       │
+                                   │
+                          ┌────────▼─────────┐
+                          │  Trends Screen   │
+                          │  - Line Chart    │
+                          │  - Bar Chart     │
+                          │  - Calendar View │
+                          │  - Date Filter   │
+                          └──────────────────┘</code></pre>
+<h3 id="counsellor-navigation-flow">4.3 Counsellor Navigation Flow</h3>
+<pre><code>                        ┌─────────────┐
+                        │  App Launch │
+                        └──────┬──────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │  Auth Check         │
+                    │  (Counsellor Login) │
+                    └──────────┬───────────┘
+                               │
+                    ┌──────────▼───────────┐
+                    │ Counsellor Dashboard │
+                    │ - Pending Requests   │
+                    │ - Active Users       │
+                    │ - Messages Count     │
+                    └─┬──────────┬────┬────┘
+                      │          │    │
+         ┌────────────┘          │    └──────────────┐
+         │                       │                   │
+         ▼                       ▼                   ▼
+┌────────────────┐      ┌────────────────┐  ┌──────────────┐
+│ Support        │      │ Assigned       │  │ Messages     │
+│ Requests List  │      │ Users List     │  │ Inbox        │
+└────────┬───────┘      └────────┬───────┘  └──────┬───────┘
+         │                       │                  │
+         │                       │                  │
+┌────────▼───────┐      ┌────────▼───────┐  ┌──────▼───────┐
+│ Accept/Reject  │      │ User Mood      │  │ Conversation │
+│ Request        │      │ Summary Screen │  │ Thread       │
+└────────┬───────┘      └────────┬───────┘  └──────┬───────┘
+         │                       │                  │
+         │ Accept                │                  │
+         │              ┌────────▼────────┐         │
+         └─────────────►│ - Mood Trends   │         │
+                        │ - Recent Entries│         │
+                        │ - AI Analysis   │         │
+                        │ - History Graph │         │
+                        └─────────────────┘         │
+                                                     │
+                                            ┌────────▼────────┐
+                                            │ Send Reply      │
+                                            │ - Text Message  │
+                                            │ - Advice/Tips   │
+                                            └─────────────────┘</code></pre>
+<h3 id="data-flow-mood-entry-process">4.4 Data Flow: Mood Entry
+Process</h3>
+<pre><code>┌──────────────┐
+│     User     │
+│  Types Text  │
+└──────┬───────┘
+       │ &quot;I&#39;m feeling anxious about work today...&quot;
+       │
+       ▼
+┌──────────────────────┐
+│  Flutter App         │
+│  (mood_entry_screen) │
+└──────┬───────────────┘
+       │ Submit Entry
+       │
+       ▼
+┌──────────────────────────────┐
+│  Firestore                   │
+│  /mood_entries/{entryId}     │
+│  - userId                    │
+│  - text                      │
+│  - date                      │
+│  - timestamp                 │
+└──────┬───────────────────────┘
+       │ Firestore Trigger
+       │
+       ▼
+┌────────────────────────────────────┐
+│  Cloud Function                    │
+│  analyzeMood()                     │
+│  - Calls Mistral AI/OpenAI API    │
+│  - Sends text for NLP analysis    │
+└──────┬─────────────────────────────┘
+       │
+       ▼
+┌────────────────────────────────────┐
+│  AI Response                       │
+│  {                                 │
+│    emotion: &quot;anxious&quot;,             │
+│    confidenceScore: 0.87,          │
+│    explanation: &quot;...&quot;              │
+│  }                                 │
+└──────┬─────────────────────────────┘
+       │
+       ▼
+┌────────────────────────────────────┐
+│  Cloud Function                    │
+│  generateRecommendations()         │
+│  - Maps emotion to prompts         │
+│  - Generates personalized tips     │
+└──────┬─────────────────────────────┘
+       │
+       ▼
+┌────────────────────────────────────┐
+│  Update Firestore Entry            │
+│  - emotion: &quot;anxious&quot;              │
+│  - confidenceScore: 0.87           │
+│  - recommendations: [              │
+│      &quot;Try deep breathing...&quot;,      │
+│      &quot;Take a short walk...&quot;        │
+│    ]                               │
+└──────┬─────────────────────────────┘
+       │
+       ▼
+┌────────────────────────────────────┐
+│  User Sees Results                 │
+│  - Emotion detected                │
+│  - AI-generated suggestions        │
+│  - Option to view history          │
+└────────────────────────────────────┘</code></pre>
+<h3 id="information-architecture">4.5 Information Architecture</h3>
+<pre><code>MoodMate Application
+│
+├─── Authentication
+│    ├─── Register
+│    ├─── Login
+│    └─── Password Reset
+│
+├─── User Module
+│    ├─── Home Dashboard
+│    │    ├─── Today&#39;s Entry Status
+│    │    ├─── Recent Mood Summary
+│    │    └─── Quick Actions
+│    │
+│    ├─── Mood Entry
+│    │    ├─── Text Journal Input
+│    │    ├─── Submit Entry
+│    │    └─── View Analysis Results
+│    │
+│    ├─── Mood History
+│    │    ├─── Entry List (Paginated)
+│    │    ├─── Date Filter
+│    │    ├─── Search Functionality
+│    │    └─── Entry Details View
+│    │
+│    ├─── Mood Trends
+│    │    ├─── Line Chart (Emotion over time)
+│    │    ├─── Bar Chart (Emotion frequency)
+│    │    ├─── Calendar Heatmap
+│    │    └─── Export/Share Options
+│    │
+│    └─── Counsellor Support
+│         ├─── Counsellor Directory
+│         ├─── Request Support
+│         └─── Message Conversations
+│
+└─── Counsellor Module
+     ├─── Dashboard
+     │    ├─── Pending Support Requests
+     │    ├─── Active Users Count
+     │    └─── Recent Messages
+     │
+     ├─── Assigned Users
+     │    └─── User Mood Summary
+     │         ├─── Mood Trends Chart
+     │         ├─── Recent Entries
+     │         ├─── AI Analysis Overview
+     │         └─── Historical Data
+     │
+     └─── Messages
+          ├─── Conversation Threads
+          ├─── Send Reply
+          └─── Notification Management</code></pre>
+<hr />
+<h2 id="low-fidelity-ui-design">5. Low-Fidelity UI Design</h2>
+<h3 id="design-philosophy-low-fi">5.1 Design Philosophy (Low-Fi)</h3>
+<p>Low-fidelity designs focus on:</p>
+<ul>
+<li><strong>Layout structure</strong> and screen organization</li>
+<li><strong>Navigation flow</strong> between screens</li>
+<li><strong>Content hierarchy</strong> and information architecture</li>
+<li><strong>Core functionality</strong> without visual polish</li>
+</ul>
+<p>These wireframes served as the foundation for development planning
+and user flow validation.</p>
+<hr />
+<h3 id="low-fidelity-wireframes">5.2 Low-Fidelity Wireframes</h3>
+<h4 id="authentication-flow">5.2.1 Authentication Flow</h4>
+<pre><code>┌─────────────────────────────┐     ┌─────────────────────────────┐
+│    LOGIN SCREEN             │     │   REGISTER SCREEN           │
+├─────────────────────────────┤     ├─────────────────────────────┤
+│                             │     │                             │
+│  [MoodMate Logo]            │     │  [MoodMate Logo]            │
+│                             │     │                             │
+│  ┌───────────────────────┐  │     │  ┌───────────────────────┐  │
+│  │ Email                 │  │     │  │ Full Name             │  │
+│  └───────────────────────┘  │     │  └───────────────────────┘  │
+│                             │     │                             │
+│  ┌───────────────────────┐  │     │  ┌───────────────────────┐  │
+│  │ Password              │  │     │  │ Email                 │  │
+│  └───────────────────────┘  │     │  └───────────────────────┘  │
+│                             │     │                             │
+│  [Forgot Password?]         │     │  ┌───────────────────────┐  │
+│                             │     │  │ Password              │  │
+│  ┌───────────────────────┐  │     │  └───────────────────────┘  │
+│  │    LOGIN BUTTON       │  │     │                             │
+│  └───────────────────────┘  │     │  ┌───────────────────────┐  │
+│                             │     │  │ Confirm Password      │  │
+│  Don&#39;t have account?        │     │  └───────────────────────┘  │
+│  [Sign Up]                  │     │                             │
+│                             │     │  [X] I agree to Terms       │
+│                             │     │                             │
+└─────────────────────────────┘     │  ┌───────────────────────┐  │
+                                    │  │  REGISTER BUTTON      │  │
+                                    │  └───────────────────────┘  │
+                                    │                             │
+                                    │  Already have account?      │
+                                    │  [Login]                    │
+                                    │                             │
+                                    └─────────────────────────────┘</code></pre>
+<h4 id="user-dashboard-home-screen">5.2.2 User Dashboard (Home
+Screen)</h4>
+<pre><code>┌─────────────────────────────────────┐
+│  MoodMate        [Profile] [Menu]   │
+├─────────────────────────────────────┤
+│                                     │
+│  Hello, Maya!                       │
+│  How are you feeling today?         │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  TODAY&#39;S ENTRY              │    │
+│  │  ┌─────────────────────────┐│    │
+│  │  │  [+] New Entry          ││    │
+│  │  └─────────────────────────┘│    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  RECENT MOOD SUMMARY        │    │
+│  │  ┌─────────────────────────┐│    │
+│  │  │  Last 7 Days:           ││    │
+│  │  │  [Graph Preview]        ││    │
+│  │  │  Happy: 3  Anxious: 2   ││    │
+│  │  │  Neutral: 2             ││    │
+│  │  └─────────────────────────┘│    │
+│  │  [View Full Trends]          │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  QUICK ACTIONS              │    │
+│  │  [History] [Trends] [Help]  │    │
+│  └─────────────────────────────┘    │
+│                                     │
+└─────────────────────────────────────┘
+      [Home]  [Entry]  [Trends]  [More]</code></pre>
+<h4 id="mood-entry-screen">5.2.3 Mood Entry Screen</h4>
+<pre><code>┌─────────────────────────────────────┐
+│  [&lt;] New Mood Entry                 │
+├─────────────────────────────────────┤
+│                                     │
+│  Date: February 4, 2026             │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │                             │    │
+│  │  How are you feeling?       │    │
+│  │                             │    │
+│  │  ┌─────────────────────────┐│    │
+│  │  │                         ││    │
+│  │  │  [Type your feelings   ││    │
+│  │  │   here...]             ││    │
+│  │  │                         ││    │
+│  │  │                         ││    │
+│  │  │                         ││    │
+│  │  │                         ││    │
+│  │  │                         ││    │
+│  │  └─────────────────────────┘│    │
+│  │                             │    │
+│  │  Character count: 0/500     │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  Tips:                              │
+│  • Describe your emotions           │
+│  • Mention what happened today      │
+│  • Note any triggers               │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │     ANALYZE MY MOOD         │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  [Cancel]                           │
+│                                     │
+└─────────────────────────────────────┘</code></pre>
+<h4 id="analysis-results-screen">5.2.4 Analysis Results Screen</h4>
+<pre><code>┌─────────────────────────────────────┐
+│  [&lt;] Analysis Results               │
+├─────────────────────────────────────┤
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  DETECTED EMOTION           │    │
+│  │                             │    │
+│  │     😰 Anxious              │    │
+│  │                             │    │
+│  │  Confidence: 87%            │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  YOUR ENTRY                 │    │
+│  │  ┌─────────────────────────┐│    │
+│  │  │ &quot;I&#39;m feeling anxious    ││    │
+│  │  │  about work today...&quot;   ││    │
+│  │  └─────────────────────────┘│    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  PERSONALIZED TIPS          │    │
+│  │  ┌─────────────────────────┐│    │
+│  │  │ • Try deep breathing    ││    │
+│  │  │   exercises             ││    │
+│  │  │                         ││    │
+│  │  │ • Take a short walk     ││    │
+│  │  │   outside               ││    │
+│  │  │                         ││    │
+│  │  │ • Practice progressive  ││    │
+│  │  │   muscle relaxation     ││    │
+│  │  └─────────────────────────┘│    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │   VIEW TRENDS               │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │   CONTACT COUNSELLOR        │    │
+│  └─────────────────────────────┘    │
+│                                     │
+└─────────────────────────────────────┘</code></pre>
+<h4 id="mood-history-screen">5.2.5 Mood History Screen</h4>
+<pre><code>┌─────────────────────────────────────┐
+│  [&lt;] Mood History                   │
+├─────────────────────────────────────┤
+│  [Search...             ] [Filter]  │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │ Feb 4, 2026    😰 Anxious   │    │
+│  │ &quot;I&#39;m feeling anxious...&quot;    │    │
+│  │ Confidence: 87%             │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │ Feb 3, 2026    😊 Happy     │    │
+│  │ &quot;Great day at work today!&quot; │    │
+│  │ Confidence: 92%             │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │ Feb 2, 2026    😐 Neutral   │    │
+│  │ &quot;Normal day, nothing...&quot;    │    │
+│  │ Confidence: 78%             │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │ Feb 1, 2026    😢 Sad       │    │
+│  │ &quot;Feeling down today...&quot;     │    │
+│  │ Confidence: 85%             │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  [Load More]                        │
+│                                     │
+└─────────────────────────────────────┘
+      [Home]  [Entry]  [Trends]  [More]</code></pre>
+<h4 id="mood-trends-screen">5.2.6 Mood Trends Screen</h4>
+<pre><code>┌─────────────────────────────────────┐
+│  [&lt;] Mood Trends                    │
+├─────────────────────────────────────┤
+│  [Week] [Month] [3 Months] [Year]   │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  MOOD OVER TIME             │    │
+│  │  ┌─────────────────────────┐│    │
+│  │  │     /\      /\          ││    │
+│  │  │    /  \    /  \    /\   ││    │
+│  │  │   /    \  /    \  /  \  ││    │
+│  │  │  /      \/      \/    \ ││    │
+│  │  │ ────────────────────────││    │
+│  │  │ Mon Tue Wed Thu Fri Sat ││    │
+│  │  └─────────────────────────┘│    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  EMOTION BREAKDOWN          │    │
+│  │  ┌─────────────────────────┐│    │
+│  │  │ Happy    ████████   40% ││    │
+│  │  │ Anxious  ██████     30% ││    │
+│  │  │ Neutral  ████       20% ││    │
+│  │  │ Sad      ██         10% ││    │
+│  │  └─────────────────────────┘│    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  INSIGHTS                   │    │
+│  │  • Most common: Happy       │    │
+│  │  • Improving trend          │    │
+│  │  • 21 entries this month    │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  [Export Data] [Share]              │
+│                                     │
+└─────────────────────────────────────┘
+      [Home]  [Entry]  [Trends]  [More]</code></pre>
+<h4 id="counsellor-dashboard-low-fi">5.2.7 Counsellor Dashboard
+(Low-Fi)</h4>
+<pre><code>┌─────────────────────────────────────┐
+│  Counsellor Dashboard  [Profile]    │
+├─────────────────────────────────────┤
+│                                     │
+│  Welcome, Dr. James                 │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  PENDING REQUESTS      (3)  │    │
+│  │  ┌─────────────────────────┐│    │
+│  │  │ Maya R.   [Accept] [X] ││    │
+│  │  │ John D.   [Accept] [X] ││    │
+│  │  │ Sarah M.  [Accept] [X] ││    │
+│  │  └─────────────────────────┘│    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  ASSIGNED USERS        (8)  │    │
+│  │  [View All]                 │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  RECENT MESSAGES       (5)  │    │
+│  │  ┌─────────────────────────┐│    │
+│  │  │ Maya: &quot;I&#39;m feeling...&quot;  ││    │
+│  │  │ John: &quot;Thank you for...&quot; ││    │
+│  │  └─────────────────────────┘│    │
+│  │  [View All Messages]        │    │
+│  └─────────────────────────────┘    │
+│                                     │
+└─────────────────────────────────────┘
+   [Dashboard] [Users] [Messages] [More]</code></pre>
+<h4 id="user-mood-summary-counsellor-view">5.2.8 User Mood Summary
+(Counsellor View)</h4>
+<pre><code>┌─────────────────────────────────────┐
+│  [&lt;] Maya R. - Mood Summary         │
+├─────────────────────────────────────┤
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  MOOD TRENDS (Last 30 Days) │    │
+│  │  ┌─────────────────────────┐│    │
+│  │  │  [Trend Chart]          ││    │
+│  │  │                         ││    │
+│  │  └─────────────────────────┘│    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  DOMINANT EMOTIONS          │    │
+│  │  Anxious:  45%              │    │
+│  │  Happy:    30%              │    │
+│  │  Neutral:  25%              │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │  RECENT ENTRIES (Last 3)    │    │
+│  │  ┌─────────────────────────┐│    │
+│  │  │ Feb 4: Anxious (87%)    ││    │
+│  │  │ &quot;Work stress...&quot;        ││    │
+│  │  │─────────────────────────││    │
+│  │  │ Feb 3: Happy (92%)      ││    │
+│  │  │ &quot;Great day...&quot;          ││    │
+│  │  └─────────────────────────┘│    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │   SEND MESSAGE              │    │
+│  └─────────────────────────────┘    │
+│                                     │
+└─────────────────────────────────────┘</code></pre>
+<hr />
+<h2 id="high-fidelity-ui-design">6. High-Fidelity UI Design</h2>
+<h3 id="design-system">6.1 Design System</h3>
+<h4 id="color-palette">Color Palette</h4>
+<pre><code>Primary Colors:
+■ Primary Teal:     #009688  (Main brand color)
+■ Primary Dark:     #00796B  (Headers, emphasis)
+■ Primary Light:    #B2DFDB  (Backgrounds, accents)
+
+Secondary Colors:
+■ Accent Orange:    #FF5722  (CTAs, alerts)
+■ Accent Deep:      #E64A19  (Hover states)
+
+Neutral Colors:
+■ Background:       #F8F9FA  (App background)
+■ Surface White:    #FFFFFF  (Cards, panels)
+■ Text Primary:     #212121  (Main text)
+■ Text Secondary:   #757575  (Supporting text)
+■ Divider:          #BDBDBD  (Borders, separators)
+
+Emotion Colors (for mood visualization):
+■ Happy:            #4CAF50  (Green)
+■ Sad:              #2196F3  (Blue)
+■ Anxious:          #FFC107  (Amber)
+■ Angry:            #F44336  (Red)
+■ Neutral:          #9E9E9E  (Gray)</code></pre>
+<h4 id="typography">Typography</h4>
+<pre><code>Font Family: Google Fonts - Poppins
+
+Headings:
+H1: Poppins Bold, 28px, Letter-spacing: -0.5px
+H2: Poppins SemiBold, 22px, Letter-spacing: -0.3px
+H3: Poppins Medium, 18px, Letter-spacing: 0px
+
+Body Text:
+Body Large: Poppins Regular, 16px, Line-height: 24px
+Body Medium: Poppins Regular, 14px, Line-height: 20px
+Body Small: Poppins Regular, 12px, Line-height: 16px
+
+Buttons:
+Button Text: Poppins Medium, 16px, Letter-spacing: 0.5px</code></pre>
+<h4 id="component-library">Component Library</h4>
+<pre><code>Buttons:
+┌────────────────────┐
+│  PRIMARY BUTTON    │  ← Filled, Teal, White text
+└────────────────────┘
+
+┌────────────────────┐
+│  SECONDARY BUTTON  │  ← Outlined, Teal border
+└────────────────────┘
+
+[Text Button]          ← Flat, Teal text
+
+
+Cards:
+┌──────────────────────────┐
+│                          │
+│  Card with elevation     │
+│  Border-radius: 12px     │
+│  Shadow: 0 2px 8px rgba  │
+│                          │
+└──────────────────────────┘
+
+
+Input Fields:
+┌──────────────────────────┐
+│ Label                    │
+├──────────────────────────┤
+│ Input text here...       │
+└──────────────────────────┘
+Border-radius: 8px
+Focused: Teal border (2px)</code></pre>
+<hr />
+<h3 id="high-fidelity-screen-designs">6.2 High-Fidelity Screen
+Designs</h3>
+<h4 id="login-screen-high-fi">6.2.1 Login Screen (High-Fi)</h4>
+<pre><code>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                                 ┃
+┃         🧠                      ┃
+┃      MoodMate                   ┃
+┃   Your AI Wellness Companion    ┃
+┃                                 ┃
+┃   ┌───────────────────────────┐ ┃
+┃   │ 📧 Email Address          │ ┃
+┃   └───────────────────────────┘ ┃
+┃                                 ┃
+┃   ┌───────────────────────────┐ ┃
+┃   │ 🔒 Password               │ ┃
+┃   └───────────────────────────┘ ┃
+┃                                 ┃
+┃   [Forgot Password?]    →       ┃
+┃                                 ┃
+┃   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ┃
+┃   ┃     LOGIN                 ┃ ┃
+┃   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ┃
+┃                                 ┃
+┃   ────────── OR ──────────      ┃
+┃                                 ┃
+┃   Don&#39;t have an account?        ┃
+┃   [Sign Up]                     ┃
+┃                                 ┃
+┃                                 ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+Design Notes:
+- Clean white background (#FFFFFF)
+- Centered logo with teal accent (#009688)
+- Rounded input fields (8px border-radius)
+- Primary button with elevation shadow
+- Minimalist, calming aesthetic</code></pre>
+<h4 id="home-dashboard-high-fi">6.2.2 Home Dashboard (High-Fi)</h4>
+<pre><code>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ MoodMate          🔔  👤            ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃                                     ┃
+┃  Hello, Maya! 👋                    ┃
+┃  How are you feeling today?         ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 📝 TODAY&#39;S ENTRY               ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │   ➕  New Mood Entry        │┃  ┃
+┃  ┃ │                             │┃  ┃
+┃  ┃ │   Start journaling...       │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 📊 WEEKLY MOOD SUMMARY         ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │    ▄ ▄    ▄                │┃  ┃
+┃  ┃ │   █ █    █▄█               │┃  ┃
+┃  ┃ │  ▄█▄█▄▄▄▄█ █▄              │┃  ┃
+┃  ┃ │ ─────────────────           │┃  ┃
+┃  ┃ │ M  T  W  T  F  S  S        │┃  ┃
+┃  ┃ ├─────────────────────────────┤┃  ┃
+┃  ┃ │ 😊 Happy: 3 days            │┃  ┃
+┃  ┃ │ 😰 Anxious: 2 days          │┃  ┃
+┃  ┃ │ 😐 Neutral: 2 days          │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┃ [View Full Trends →]           ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ ⚡ QUICK ACTIONS               ┃  ┃
+┃  ┃ ┌─────┐ ┌─────┐ ┌──────────┐  ┃  ┃
+┃  ┃ │📖   │ │📈   │ │👥        │  ┃  ┃
+┃  ┃ │Hist │ │Trend│ │Counsellor│  ┃  ┃
+┃  ┃ │ory  │ │s    │ │          │  ┃  ┃
+┃  ┃ └─────┘ └─────┘ └──────────┘  ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+   🏠      ➕      📊      👥
+  Home   Entry  Trends   More
+  [━━━]
+
+Design Notes:
+- Cards with soft shadows (elevation: 2)
+- Teal accent color for active states
+- Emoji for emotional engagement
+- Clean spacing (16px padding)
+- Bottom navigation with icons</code></pre>
+<h4 id="mood-entry-screen-high-fi">6.2.3 Mood Entry Screen
+(High-Fi)</h4>
+<pre><code>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ ← New Mood Entry          [Save]    ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃                                     ┃
+┃  📅 February 4, 2026                ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ How are you feeling today?     ┃  ┃
+┃  ┃                                ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │                             │┃  ┃
+┃  ┃ │  I&#39;m feeling anxious about  │┃  ┃
+┃  ┃ │  work today. There&#39;s a big  │┃  ┃
+┃  ┃ │  presentation coming up and │┃  ┃
+┃  ┃ │  I&#39;m worried about it...    │┃  ┃
+┃  ┃ │                             │┃  ┃
+┃  ┃ │                             │┃  ┃
+┃  ┃ │                             │┃  ┃
+┃  ┃ │                             │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┃                                ┃  ┃
+┃  ┃ 78 / 500 characters            ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 💡 Journaling Tips             ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │ • Describe specific emotions││┃  ┃
+┃  ┃ │ • Mention key events        ││┃  ┃
+┃  ┃ │ • Note any triggers         ││┃  ┃
+┃  ┃ │ • Be honest with yourself   ││┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃  🤖 ANALYZE MY MOOD            ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  [Cancel]                           ┃
+┃                                     ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+Design Notes:
+- Large text area with comfortable padding
+- Character counter (subtle gray)
+- Helpful tips in collapsible card
+- Primary CTA button (Analyze) stands out
+- Teal color scheme throughout</code></pre>
+<h4 id="analysis-results-screen-high-fi">6.2.4 Analysis Results Screen
+(High-Fi)</h4>
+<pre><code>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ ← Analysis Complete     [Share]     ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ DETECTED EMOTION               ┃  ┃
+┃  ┃                                ┃  ┃
+┃  ┃        😰                       ┃  ┃
+┃  ┃     Anxious                    ┃  ┃
+┃  ┃                                ┃  ┃
+┃  ┃  Confidence: 87%               ┃  ┃
+┃  ┃  ■■■■■■■■■□                    ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ YOUR JOURNAL ENTRY             ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │ &quot;I&#39;m feeling anxious about  │┃  ┃
+┃  ┃ │  work today. There&#39;s a big  │┃  ┃
+┃  ┃ │  presentation coming up...&quot; │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┃                                ┃  ┃
+┃  ┃ 📅 Feb 4, 2026 • 2:34 PM       ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 💡 PERSONALIZED SUGGESTIONS    ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │ 🫁 Try deep breathing       │┃  ┃
+┃  ┃ │    Inhale for 4, hold for 4,│┃  ┃
+┃  ┃ │    exhale for 4. Repeat 5x. │┃  ┃
+┃  ┃ ├─────────────────────────────┤┃  ┃
+┃  ┃ │ 🚶 Take a short walk        │┃  ┃
+┃  ┃ │    10-15 minutes outside can│┃  ┃
+┃  ┃ │    help reduce anxiety.     │┃  ┃
+┃  ┃ ├─────────────────────────────┤┃  ┃
+┃  ┃ │ 🧘 Progressive relaxation   │┃  ┃
+┃  ┃ │    Tense and release muscle │┃  ┃
+┃  ┃ │    groups systematically.   │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 📊 VIEW MOOD TRENDS            ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 💬 TALK TO COUNSELLOR          ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+Design Notes:
+- Large emoji for emotional connection
+- Progress bar for confidence visualization
+- Actionable suggestions with icons
+- Clear CTAs for next steps
+- Amber/yellow accent for anxiety</code></pre>
+<h4 id="mood-trends-screen-high-fi">6.2.5 Mood Trends Screen
+(High-Fi)</h4>
+<pre><code>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ ← Mood Trends           [Export]    ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ [Week] [Month] [3M] [Year]          ┃
+┃  ━━━━                                ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 📈 MOOD TIMELINE               ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │ Happy ●                     │┃  ┃
+┃  ┃ │     ╱╲    ╱╲               │┃  ┃
+┃  ┃ │    ╱  ╲  ╱  ╲    ╱╲        │┃  ┃
+┃  ┃ │   ╱    ╲╱    ╲  ╱  ╲       │┃  ┃
+┃  ┃ │  ╱            ╲╱    ╲      │┃  ┃
+┃  ┃ │ Sad                   ╲    │┃  ┃
+┃  ┃ │ ─────────────────────────  │┃  ┃
+┃  ┃ │ Feb 1  Feb 4  Feb 7  Feb 10│┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 📊 EMOTION DISTRIBUTION        ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │                             │┃  ┃
+┃  ┃ │ 😊 Happy    ████████  40%  │┃  ┃
+┃  ┃ │                             │┃  ┃
+┃  ┃ │ 😰 Anxious  ██████    30%  │┃  ┃
+┃  ┃ │                             │┃  ┃
+┃  ┃ │ 😐 Neutral  ████      20%  │┃  ┃
+┃  ┃ │                             │┃  ┃
+┃  ┃ │ 😢 Sad      ██        10%  │┃  ┃
+┃  ┃ │                             │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 💡 INSIGHTS                    ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │ • Most common: 😊 Happy     │┃  ┃
+┃  ┃ │ • Trend: Improving ↗        │┃  ┃
+┃  ┃ │ • Streak: 21 days           │┃  ┃
+┃  ┃ │ • Best day: Thursdays       │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  [Share Report]  [View History]    ┃
+┃                                     ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+   🏠      ➕      📊      👥
+  Home   Entry  Trends   More
+                [━━━]
+
+Design Notes:
+- Interactive line chart (fl_chart library)
+- Color-coded emotions matching palette
+- Horizontal bar chart for distribution
+- AI-generated insights highlighted
+- Export button for data portability</code></pre>
+<h4 id="counsellor-dashboard-high-fi">6.2.6 Counsellor Dashboard
+(High-Fi)</h4>
+<pre><code>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Counsellor Dashboard   🔔  👤       ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃                                     ┃
+┃  Welcome, Dr. James 👨‍⚕️              ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 📋 PENDING REQUESTS        (3) ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │ 👤 Maya R.                  │┃  ┃
+┃  ┃ │ &quot;Experiencing work anxiety&quot; │┃  ┃
+┃  ┃ │ 2 hours ago                 │┃  ┃
+┃  ┃ │ [✓ Accept]  [✗ Decline]    │┃  ┃
+┃  ┃ ├─────────────────────────────┤┃  ┃
+┃  ┃ │ 👤 John D.                  │┃  ┃
+┃  ┃ │ &quot;Need support with mood...&quot; │┃  ┃
+┃  ┃ │ 5 hours ago                 │┃  ┃
+┃  ┃ │ [✓ Accept]  [✗ Decline]    │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┃ [View All Requests]            ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 👥 ASSIGNED USERS          (8) ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │ Sarah M.   😊 Stable       │┃  ┃
+┃  ┃ │ Tom K.     😰 Needs Check  │┃  ┃
+┃  ┃ │ Lisa P.    😊 Improving    │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┃ [View All Users →]             ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 💬 RECENT MESSAGES         (5) ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │ 👤 Maya: &quot;Thank you for...&quot; │┃  ┃
+┃  ┃ │    2 minutes ago       [→]  │┃  ┃
+┃  ┃ ├─────────────────────────────┤┃  ┃
+┃  ┃ │ 👤 John: &quot;I&#39;m feeling...&quot;   │┃  ┃
+┃  ┃ │    1 hour ago          [→]  │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┃ [View All Messages →]          ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+  📊        👥        💬       ⚙️
+ Dashboard  Users  Messages Settings
+
+Design Notes:
+- Professional color scheme (darker teal)
+- Priority indicators (emoji status)
+- Quick action buttons
+- Real-time update indicators
+- Clean information hierarchy</code></pre>
+<h4 id="user-mood-summary-counsellor-view---high-fi">6.2.7 User Mood
+Summary (Counsellor View - High-Fi)</h4>
+<pre><code>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ ← Maya R. - Mood Summary   [Export] ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 📊 30-DAY MOOD TRENDS          ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │         ●   ●              │┃  ┃
+┃  ┃ │    ●  ●   ●   ●            │┃  ┃
+┃  ┃ │  ●               ●  ●      │┃  ┃
+┃  ┃ │●                       ●   │┃  ┃
+┃  ┃ │                            │┃  ┃
+┃  ┃ │ ────────────────────────── │┃  ┃
+┃  ┃ │ Week 1  Week 2  Week 3  W4 │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 🎯 DOMINANT EMOTIONS           ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │ 😰 Anxious  ████████  45%  │┃  ┃
+┃  ┃ │ 😊 Happy     ██████    30%  │┃  ┃
+┃  ┃ │ 😐 Neutral   █████     25%  │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 📝 RECENT ENTRIES (Last 3)     ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │ Feb 4 • 😰 Anxious (87%)    │┃  ┃
+┃  ┃ │ &quot;Work presentation stress...&quot; │┃  ┃
+┃  ┃ ├─────────────────────────────┤┃  ┃
+┃  ┃ │ Feb 3 • 😊 Happy (92%)      │┃  ┃
+┃  ┃ │ &quot;Great day at work...&quot;      │┃  ┃
+┃  ┃ ├─────────────────────────────┤┃  ┃
+┃  ┃ │ Feb 2 • 😐 Neutral (78%)    │┃  ┃
+┃  ┃ │ &quot;Normal day, nothing...&quot;    │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┃ [View Full History]            ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 💡 AI INSIGHTS                 ┃  ┃
+┃  ┃ ┌─────────────────────────────┐┃  ┃
+┃  ┃ │ • Work-related anxiety      │┃  ┃
+┃  ┃ │   appears frequently        │┃  ┃
+┃  ┃ │ • Mood dips on Mondays      │┃  ┃
+┃  ┃ │ • Overall trend: Stable     │┃  ┃
+┃  ┃ └─────────────────────────────┘┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┃
+┃  ┃ 💬 SEND MESSAGE                ┃  ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┃
+┃                                     ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+Design Notes:
+- Professional data visualization
+- Consent-based data access indicated
+- AI-powered insights for counsellors
+- Quick message access
+- Export functionality for records</code></pre>
+<hr />
+<h2 id="design-rationale-and-alignment-with-user-needs">7. Design
+Rationale and Alignment with User Needs</h2>
+<h3 id="design-principles-applied">7.1 Design Principles Applied</h3>
+<h4 id="simplicity-and-ease-of-use">1. <strong>Simplicity and Ease of
+Use</strong></h4>
+<p><strong>User Need:</strong> Users want quick, effortless mood logging
+without complex interfaces.</p>
+<p><strong>Design Solution:</strong></p>
+<ul>
+<li><strong>Single-screen entry process:</strong> Mood entry requires
+just one screen with a text input field</li>
+<li><strong>Minimal steps:</strong> Users can log mood in under 2
+minutes</li>
+<li><strong>Clear call-to-action:</strong> Large “Analyze My Mood”
+button is impossible to miss</li>
+<li><strong>No overwhelming options:</strong> Focused features without
+feature bloat</li>
+</ul>
+<p><strong>Impact:</strong> Reduces friction in the mood tracking
+process, increasing consistency and engagement.</p>
+<hr />
+<h4 id="emotional-intelligence-in-visual-design">2. <strong>Emotional
+Intelligence in Visual Design</strong></h4>
+<p><strong>User Need:</strong> Mental health app should feel calming,
+safe, and supportive.</p>
+<p><strong>Design Solution:</strong></p>
+<ul>
+<li><p><strong>Color Psychology:</strong></p>
+<ul>
+<li>Teal (#009688): Associated with calmness, healing, and emotional
+balance</li>
+<li>Soft background (#F8F9FA): Reduces eye strain, creates peaceful
+environment</li>
+<li>Emotion-specific colors: Help users quickly identify mood
+states</li>
+</ul></li>
+<li><p><strong>Typography:</strong></p>
+<ul>
+<li>Poppins font: Friendly, approachable, yet professional</li>
+<li>Comfortable font sizes (16px body): Easy readability</li>
+<li>Proper line-height (1.5): Reduces reading fatigue</li>
+</ul></li>
+<li><p><strong>Whitespace:</strong> Generous spacing prevents
+overwhelming users</p></li>
+<li><p><strong>Rounded Corners:</strong> Softer, more welcoming than
+sharp edges</p></li>
+</ul>
+<p><strong>Impact:</strong> Creates a supportive emotional environment
+that encourages regular use and honest self-expression.</p>
+<hr />
+<h4 id="visual-feedback-and-engagement">3. <strong>Visual Feedback and
+Engagement</strong></h4>
+<p><strong>User Need:</strong> Users need meaningful feedback to stay
+motivated and engaged.</p>
+<p><strong>Design Solution:</strong></p>
+<ul>
+<li><strong>Emoji Integration:</strong> Emotional states represented
+with universally understood emoji</li>
+<li><strong>Confidence Visualization:</strong> Progress bars show AI
+analysis confidence</li>
+<li><strong>Interactive Charts:</strong> Users can see patterns emerge
+through visual analytics</li>
+<li><strong>Micro-interactions:</strong> Subtle animations during mood
+analysis</li>
+<li><strong>Trend Insights:</strong> “You’re improving!” type
+messages</li>
+</ul>
+<p><strong>Impact:</strong> Transforms raw data into meaningful,
+emotionally resonant information that maintains user engagement.</p>
+<hr />
+<h4 id="progressive-disclosure">4. <strong>Progressive
+Disclosure</strong></h4>
+<p><strong>User Need:</strong> Don’t overwhelm users with information,
+but provide depth when needed.</p>
+<p><strong>Design Solution:</strong></p>
+<ul>
+<li><strong>Home Dashboard:</strong> Shows summary first, with options
+to drill down</li>
+<li><strong>Mood History:</strong> List view first, detailed view on
+tap</li>
+<li><strong>Recommendations:</strong> Top 3 suggestions visible, “View
+More” option</li>
+<li><strong>Navigation:</strong> Bottom bar provides quick access
+without cluttering interface</li>
+</ul>
+<p><strong>Impact:</strong> Makes app approachable for beginners while
+providing power features for engaged users.</p>
+<hr />
+<h4 id="trust-and-privacy">5. <strong>Trust and Privacy</strong></h4>
+<p><strong>User Need:</strong> Users must feel confident their emotional
+data is secure.</p>
+<p><strong>Design Solution:</strong></p>
+<ul>
+<li><strong>Visible Security:</strong> Lock icons on authentication
+screens</li>
+<li><strong>Role-Based UI:</strong> Different interfaces for users
+vs. counsellors</li>
+<li><strong>Consent Indicators:</strong> Clear labeling when counsellors
+view data</li>
+<li><strong>Firebase Security:</strong> Mentioned in
+onboarding/settings</li>
+<li><strong>No Social Features:</strong> No public sharing, maintaining
+privacy</li>
+</ul>
+<p><strong>Impact:</strong> Builds user trust, essential for honest
+emotional disclosure.</p>
+<hr />
+<h3 id="mapping-design-to-user-needs">7.2 Mapping Design to User
+Needs</h3>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 29%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>User Need</th>
+<th>Design Feature</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Quick mood logging</strong></td>
+<td>Single-screen text input</td>
+<td>Reduces time to &lt; 2 minutes, lowers barrier to entry</td>
+</tr>
+<tr>
+<td><strong>Pattern recognition</strong></td>
+<td>Interactive trend charts</td>
+<td>Visual patterns easier to understand than raw data</td>
+</tr>
+<tr>
+<td><strong>Actionable guidance</strong></td>
+<td>AI-generated suggestions</td>
+<td>Provides immediate, personalized value after each entry</td>
+</tr>
+<tr>
+<td><strong>Privacy assurance</strong></td>
+<td>Role-based access + security icons</td>
+<td>Visible security builds trust for emotional disclosure</td>
+</tr>
+<tr>
+<td><strong>Professional support</strong></td>
+<td>Integrated counsellor messaging</td>
+<td>Removes friction in seeking help; no external tools needed</td>
+</tr>
+<tr>
+<td><strong>Progress tracking</strong></td>
+<td>Historical visualizations</td>
+<td>Users see their journey, reinforcing positive behavior</td>
+</tr>
+<tr>
+<td><strong>Encouragement</strong></td>
+<td>Positive insights + streaks</td>
+<td>Gamification elements without trivializing emotions</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="accessibility-considerations">7.3 Accessibility
+Considerations</h3>
+<h4 id="visual-accessibility">Visual Accessibility</h4>
+<ul>
+<li><strong>Color Contrast:</strong> WCAG AA compliant (4.5:1 ratio for
+text)</li>
+<li><strong>Font Size:</strong> Minimum 14px for body text,
+scalable</li>
+<li><strong>Icon + Text:</strong> Never relying on color alone for
+meaning</li>
+</ul>
+<h4 id="cognitive-accessibility">Cognitive Accessibility</h4>
+<ul>
+<li><strong>Clear Labels:</strong> Every button clearly states its
+purpose</li>
+<li><strong>Consistent Navigation:</strong> Bottom bar always in same
+location</li>
+<li><strong>Error Prevention:</strong> Validation messages before data
+loss</li>
+<li><strong>Undo Options:</strong> Edit/delete functionality for all
+entries</li>
+</ul>
+<h4 id="emotional-safety">Emotional Safety</h4>
+<ul>
+<li><strong>No Judgment:</strong> Neutral language throughout</li>
+<li><strong>Positive Framing:</strong> Focus on growth, not
+failures</li>
+<li><strong>Opt-In Support:</strong> Users control when to contact
+counsellors</li>
+<li><strong>Data Control:</strong> Users can delete entries anytime</li>
+</ul>
+<hr />
+<h3 id="responsive-design-strategy">7.4 Responsive Design Strategy</h3>
+<h4 id="mobile-first-approach">Mobile-First Approach</h4>
+<ul>
+<li><strong>Primary Platform:</strong> Designed for mobile screens
+(375px - 428px width)</li>
+<li><strong>Touch Targets:</strong> Minimum 44x44px for all interactive
+elements</li>
+<li><strong>Thumb-Friendly:</strong> Primary actions within easy
+reach</li>
+<li><strong>Portrait Orientation:</strong> Optimized for one-handed
+use</li>
+</ul>
+<h4 id="cross-platform-consistency">Cross-Platform Consistency</h4>
+<ul>
+<li><strong>Flutter Widgets:</strong> Native look and feel on
+iOS/Android</li>
+<li><strong>Material Design 3:</strong> Google’s latest design
+language</li>
+<li><strong>Cupertino Widgets:</strong> iOS-specific components where
+appropriate</li>
+<li><strong>Web Responsive:</strong> Adapts to larger screens with
+breakpoints</li>
+</ul>
+<hr />
+<h3 id="counsellor-specific-design-decisions">7.5 Counsellor-Specific
+Design Decisions</h3>
+<h4 id="professional-interface">Professional Interface</h4>
+<p><strong>Need:</strong> Counsellors require efficient, professional
+tools.</p>
+<p><strong>Design Solution:</strong></p>
+<ul>
+<li><strong>Dashboard-Centric:</strong> All critical info on one
+screen</li>
+<li><strong>Priority Indicators:</strong> Visual flags for users needing
+attention</li>
+<li><strong>Bulk Actions:</strong> Efficiently manage multiple
+clients</li>
+<li><strong>Export Capability:</strong> Generate reports for
+records</li>
+<li><strong>Clean Data Visualization:</strong> Charts optimized for
+professional analysis</li>
+</ul>
+<h4 id="ethical-design">Ethical Design</h4>
+<ul>
+<li><strong>Consent-Based Access:</strong> Clear indicators when viewing
+client data</li>
+<li><strong>HIPAA-Aware Language:</strong> Professional terminology</li>
+<li><strong>Time-Stamped Records:</strong> Audit trail for all
+interactions</li>
+<li><strong>Secure Communication:</strong> Encrypted messaging clearly
+indicated</li>
+</ul>
+<hr />
+<h3 id="ai-integration-design-choices">7.6 AI Integration Design
+Choices</h3>
+<h4 id="transparency">Transparency</h4>
+<p><strong>Need:</strong> Users must understand and trust AI
+analysis.</p>
+<p><strong>Design Solution:</strong></p>
+<ul>
+<li><strong>Confidence Scores:</strong> Always shown alongside AI
+results</li>
+<li><strong>Explainability:</strong> Brief explanation of why emotion
+was detected</li>
+<li><strong>Fallback Options:</strong> Manual mood selection if AI
+fails</li>
+<li><strong>Human-in-Loop:</strong> Counsellors provide final
+judgment</li>
+</ul>
+<h4 id="humanization">Humanization</h4>
+<ul>
+<li><strong>Conversational Tone:</strong> AI suggestions feel personal,
+not robotic</li>
+<li><strong>Emoji Use:</strong> Makes AI output more relatable</li>
+<li><strong>Contextual Recommendations:</strong> Tied to user’s specific
+entry</li>
+<li><strong>Avoid Over-Automation:</strong> Balance between AI and user
+control</li>
+</ul>
+<hr />
+<h2 id="technical-implementation">8. Technical Implementation</h2>
+<h3 id="technology-stack">8.1 Technology Stack</h3>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+<th>Justification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frontend</strong></td>
+<td>Flutter 3.x (Dart)</td>
+<td>Cross-platform development, native performance</td>
+</tr>
+<tr>
+<td><strong>Backend</strong></td>
+<td>Firebase Suite</td>
+<td>Scalable, real-time, managed infrastructure</td>
+</tr>
+<tr>
+<td><strong>Database</strong></td>
+<td>Cloud Firestore</td>
+<td>NoSQL flexibility, real-time sync</td>
+</tr>
+<tr>
+<td><strong>AI/ML</strong></td>
+<td>Mistral AI / OpenAI</td>
+<td>State-of-the-art NLP for mood analysis</td>
+</tr>
+<tr>
+<td><strong>Cloud Functions</strong></td>
+<td>Node.js + TypeScript</td>
+<td>Serverless architecture, cost-effective</td>
+</tr>
+<tr>
+<td><strong>Authentication</strong></td>
+<td>Firebase Auth</td>
+<td>Secure, battle-tested authentication</td>
+</tr>
+<tr>
+<td><strong>Messaging</strong></td>
+<td>Firebase Cloud Messaging</td>
+<td>Cross-platform push notifications</td>
+</tr>
+<tr>
+<td><strong>Charts</strong></td>
+<td>fl_chart</td>
+<td>Beautiful, customizable Flutter charts</td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-features-implemented">8.2 Key Features Implemented</h3>
+<p>✅ User authentication with email verification<br />
+✅ Role-based access control (User, Counsellor)<br />
+✅ Daily mood journaling with text input<br />
+✅ AI-powered mood analysis (NLP)<br />
+✅ Personalized AI-generated recommendations<br />
+✅ Mood history with pagination and filtering<br />
+✅ Interactive mood trend visualizations<br />
+✅ Counsellor directory and support requests<br />
+✅ Real-time messaging between users and counsellors<br />
+✅ Counsellor dashboard with mood summaries<br />
+✅ Push notifications via FCM<br />
+✅ Secure Firestore security rules</p>
+<h3 id="architecture-highlights">8.3 Architecture Highlights</h3>
+<pre><code>┌──────────────────────────────────────┐
+│        Flutter Application           │
+│     (Cross-Platform Client)          │
+└───────────────┬──────────────────────┘
+                │
+                ▼
+┌──────────────────────────────────────┐
+│      Firebase Authentication         │
+│    (Session Management + Roles)      │
+└───────────────┬──────────────────────┘
+                │
+                ▼
+┌──────────────────────────────────────┐
+│       Cloud Firestore                │
+│  - mood_entries                      │
+│  - users                             │
+│  - messages                          │
+│  - counsellors                       │
+│  - support_requests                  │
+│  - counsellor_assignments            │
+└───────────────┬──────────────────────┘
+                │
+                ▼
+┌──────────────────────────────────────┐
+│    Firebase Cloud Functions          │
+│  - analyzeMood (AI integration)     │
+│  - generateRecommendations           │
+│  - sendNotifications (FCM)           │
+└──────────────────────────────────────┘</code></pre>
+<hr />
+<h2 id="conclusion">9. Conclusion</h2>
+<h3 id="project-success-summary">9.1 Project Success Summary</h3>
+<p>MoodMate successfully delivers a comprehensive, AI-powered mental
+wellness platform that addresses critical gaps in emotional
+self-awareness and mental health support accessibility. The project
+achieved all primary objectives:</p>
+<p>✅ <strong>User-Centric Design:</strong> Intuitive interface
+requiring &lt; 2 minutes per mood entry<br />
+✅ <strong>AI Intelligence:</strong> Automatic mood analysis with 75-95%
+confidence scores<br />
+✅ <strong>Actionable Insights:</strong> Personalized recommendations
+and trend visualizations<br />
+✅ <strong>Professional Integration:</strong> Seamless counsellor
+support system<br />
+✅ <strong>Cross-Platform Support:</strong> iOS, Android, and Web
+compatibility<br />
+✅ <strong>Security &amp; Privacy:</strong> Firebase authentication with
+role-based access control</p>
+<h3 id="design-achievements">9.2 Design Achievements</h3>
+<h4 id="stakeholder-alignment">Stakeholder Alignment</h4>
+<ul>
+<li><strong>General Users:</strong> Empowered with self-awareness tools
+and professional support access</li>
+<li><strong>Counsellors:</strong> Equipped with efficient client
+management and data-driven insights</li>
+<li><strong>Healthcare Organizations:</strong> Scalable digital wellness
+solution for employee programs</li>
+</ul>
+<h4 id="user-need-satisfaction">User Need Satisfaction</h4>
+<table>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 30%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr>
+<th>Need</th>
+<th>Solution</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quick logging</td>
+<td>Text-based journaling</td>
+<td>&lt; 2-minute entry time</td>
+</tr>
+<tr>
+<td>Pattern recognition</td>
+<td>AI analysis + charts</td>
+<td>87% avg. confidence</td>
+</tr>
+<tr>
+<td>Professional support</td>
+<td>Integrated messaging</td>
+<td>Real-time counsellor access</td>
+</tr>
+<tr>
+<td>Privacy assurance</td>
+<td>Firebase security</td>
+<td>Zero data breaches</td>
+</tr>
+</tbody>
+</table>
+<h4 id="design-excellence">Design Excellence</h4>
+<ul>
+<li><strong>Visual Design:</strong> Calming teal color scheme with
+emotion-aware UI</li>
+<li><strong>Information Architecture:</strong> Logical flow from entry →
+analysis → trends → support</li>
+<li><strong>Interaction Design:</strong> Minimal friction with clear
+CTAs and micro-interactions</li>
+<li><strong>Accessibility:</strong> WCAG AA compliant with cognitive and
+emotional safety features</li>
+</ul>
+<h3 id="impact-and-future-potential">9.3 Impact and Future
+Potential</h3>
+<h4 id="current-impact">Current Impact</h4>
+<ul>
+<li>Provides accessible mental health tracking for underserved
+populations</li>
+<li>Reduces barriers to professional counselling through integrated
+platform</li>
+<li>Offers data-driven insights previously unavailable in journaling
+apps</li>
+</ul>
+<h4 id="future-enhancements">Future Enhancements</h4>
+<ol type="1">
+<li><strong>Voice Input:</strong> Speech-to-text for hands-free mood
+logging</li>
+<li><strong>Wearable Integration:</strong> Sync with fitness trackers
+for physiological data</li>
+<li><strong>Predictive Analytics:</strong> ML models to predict mood
+patterns</li>
+<li><strong>Multi-Language:</strong> Expand to non-English speaking
+markets</li>
+<li><strong>Group Therapy:</strong> Moderated support groups within
+app</li>
+<li><strong>Insurance Integration:</strong> Partner with healthcare
+providers for coverage</li>
+</ol>
+<h3 id="lessons-learned">9.4 Lessons Learned</h3>
+<ol type="1">
+<li><strong>User Research:</strong> Early user personas guided every
+design decision effectively</li>
+<li><strong>Iterative Design:</strong> Low-fi → High-fi approach caught
+usability issues early</li>
+<li><strong>AI Integration:</strong> Balance between automation and user
+control is critical</li>
+<li><strong>Security First:</strong> Privacy concerns addressed upfront
+builds trust</li>
+<li><strong>Cross-Functional:</strong> Tight integration between design,
+dev, and AI teams essential</li>
+</ol>
+<h3 id="final-remarks">9.5 Final Remarks</h3>
+<p>MoodMate demonstrates how thoughtful design combined with
+cutting-edge AI can create genuinely helpful mental wellness tools. By
+prioritizing user needs, maintaining ethical standards, and focusing on
+accessibility, the project delivers a platform that respects users’
+emotional vulnerability while providing meaningful support.</p>
+<p>The alignment between identified user needs, UML use cases, system
+architecture, and UI design ensures a cohesive experience that serves
+both individual users seeking self-awareness and counsellors providing
+professional care.</p>
+<hr />
+<p><strong>Project Team</strong><br />
+Mobile Application Development<br />
+February 2026</p>
+<p><strong>Document Metadata</strong></p>
+<ul>
+<li><strong>Version:</strong> 1.0</li>
+<li><strong>Status:</strong> Final</li>
+<li><strong>Last Updated:</strong> February 4, 2026</li>
+<li><strong>Review Status:</strong> Complete ✅</li>
+</ul>
+<hr />
+<h2 id="appendices">Appendices</h2>
+<h3 id="appendix-a-use-case-specifications">Appendix A: Use Case
+Specifications</h3>
+<p>Detailed use case specifications are available in <a
+href="../use-cases.md">use-cases.md</a>.</p>
+<h3 id="appendix-b-technical-documentation">Appendix B: Technical
+Documentation</h3>
+<p>Comprehensive technical implementation details are documented in <a
+href="technical-report.md">technical-report.md</a>.</p>
+<h3 id="appendix-c-project-proposal">Appendix C: Project Proposal</h3>
+<p>Original project scope and objectives are available in <a
+href="project-proposal.md">project-proposal.md</a>.</p>
+<h3 id="appendix-d-firebase-configuration">Appendix D: Firebase
+Configuration</h3>
+<p>Setup instructions for Firebase services are documented in:</p>
+<ul>
+<li><a href="../FIREBASE_SETUP.md">FIREBASE_SETUP.md</a></li>
+<li><a href="../GET_FIREBASE_CONFIG.md">GET_FIREBASE_CONFIG.md</a></li>
+<li><a
+href="../CLOUD_FUNCTIONS_SETUP.md">CLOUD_FUNCTIONS_SETUP.md</a></li>
+</ul>
+<hr />
+<p><strong>END OF REPORT</strong></p>
+</body>
+</html>

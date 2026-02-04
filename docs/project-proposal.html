@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>MoodMate - Project Proposal</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="formal-style.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">MoodMate - Project Proposal</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#moodmate-project-proposal"
+id="toc-moodmate-project-proposal">MoodMate Project Proposal</a>
+<ul>
+<li><a href="#project-background-and-problem-statement"
+id="toc-project-background-and-problem-statement">1. Project Background
+and Problem Statement</a></li>
+<li><a href="#project-objectives-and-scope"
+id="toc-project-objectives-and-scope">2. Project Objectives and
+Scope</a></li>
+<li><a href="#target-users-and-identified-user-needs"
+id="toc-target-users-and-identified-user-needs">3. Target Users and
+Identified User Needs</a></li>
+<li><a href="#overview-of-proposed-features"
+id="toc-overview-of-proposed-features">4. Overview of Proposed
+Features</a></li>
+<li><a href="#project-timeline-and-milestones"
+id="toc-project-timeline-and-milestones">5. Project Timeline and
+Milestones</a></li>
+<li><a href="#appendix" id="toc-appendix">Appendix</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="moodmate-project-proposal">MoodMate Project Proposal</h1>
+<h2 id="project-background-and-problem-statement">1. Project Background
+and Problem Statement</h2>
+<h3 id="background">Background</h3>
+<p>Mental health awareness has grown significantly in recent years, yet
+many individuals still struggle to understand and manage their emotional
+well-being. Traditional methods of mood tracking—such as paper journals
+or generic note-taking apps—often lack the analytical capabilities
+needed to identify patterns and provide meaningful insights.
+Furthermore, access to professional mental health support remains
+limited for many people due to cost, availability, and stigma.</p>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>Many individuals face the following challenges when it comes to
+emotional well-being:</p>
+<ol type="1">
+<li><p><strong>Lack of Self-Awareness:</strong> People often fail to
+recognize patterns in their emotional states, making it difficult to
+identify triggers or understand the underlying causes of mood
+fluctuations.</p></li>
+<li><p><strong>Limited Access to Support:</strong> Professional mental
+health services can be expensive, have long wait times, or be
+geographically inaccessible, leaving many without timely
+support.</p></li>
+<li><p><strong>Fragmented Solutions:</strong> Existing mood tracking
+applications typically offer basic logging functionality without
+intelligent analysis, personalized recommendations, or integration with
+professional support systems.</p></li>
+<li><p><strong>Privacy Concerns:</strong> Users are often hesitant to
+document their emotional experiences digitally due to concerns about
+data security and privacy.</p></li>
+<li><p><strong>Inconsistent Engagement:</strong> Without meaningful
+feedback or encouragement, users frequently abandon mood tracking
+practices before establishing beneficial habits.</p></li>
+</ol>
+<p>MoodMate aims to address these challenges by providing an
+intelligent, AI-powered mood tracking platform that combines personal
+journaling with automated emotional analysis, personalized
+recommendations, and optional access to professional counsellors.</p>
+<hr />
+<h2 id="project-objectives-and-scope">2. Project Objectives and
+Scope</h2>
+<h3 id="objectives">Objectives</h3>
+<ol type="1">
+<li><p><strong>Enable Emotional Self-Tracking:</strong> Provide users
+with an intuitive platform to record and reflect on their daily
+emotional experiences through text-based journaling.</p></li>
+<li><p><strong>Deliver AI-Powered Insights:</strong> Leverage artificial
+intelligence (OpenAI) to automatically analyze mood entries, detect
+emotional patterns, and provide meaningful insights.</p></li>
+<li><p><strong>Offer Personalized Recommendations:</strong> Generate
+contextual tips, quotes, and suggestions based on detected emotional
+states to support user well-being.</p></li>
+<li><p><strong>Visualize Mood Trends:</strong> Present historical mood
+data through interactive charts and visualizations to help users
+identify patterns over time.</p></li>
+<li><p><strong>Facilitate Professional Support:</strong> Connect users
+with counsellors through an integrated messaging system, enabling timely
+professional guidance when needed.</p></li>
+<li><p><strong>Ensure Data Privacy:</strong> Implement robust security
+measures including authentication, role-based access control, and
+encrypted data transmission.</p></li>
+</ol>
+<h3 id="scope">Scope</h3>
+<h4 id="in-scope">In Scope</h4>
+<ul>
+<li>Cross-platform mobile application (iOS and Android) built with
+Flutter</li>
+<li>Web application support</li>
+<li>User registration and authentication system</li>
+<li>Daily mood journaling with text input</li>
+<li>AI-powered mood analysis using natural language processing</li>
+<li>Automated mood-based recommendations and suggestions</li>
+<li>Mood history viewing with filtering capabilities</li>
+<li>Interactive mood trend visualizations (charts and graphs)</li>
+<li>Counsellor directory and contact functionality</li>
+<li>Real-time messaging between users and counsellors</li>
+<li>Counsellor dashboard for viewing assigned user mood summaries</li>
+<li>Push notifications for messages and updates</li>
+<li>Role-based access control (User, Counsellor)</li>
+</ul>
+<h4 id="out-of-scope-demo-version">Out of Scope (Demo Version)</h4>
+<ul>
+<li>Voice-based mood input</li>
+<li>Integration with wearable devices</li>
+<li>Video/audio counselling sessions</li>
+<li>Payment processing for premium features</li>
+<li>HIPAA/GDPR full compliance certification</li>
+<li>Multi-language support</li>
+<li>Production-level deployment infrastructure</li>
+</ul>
+<hr />
+<h2 id="target-users-and-identified-user-needs">3. Target Users and
+Identified User Needs</h2>
+<h3 id="primary-target-users">Primary Target Users</h3>
+<h4 id="general-users-individuals-seeking-emotional-wellness">1. General
+Users (Individuals Seeking Emotional Wellness)</h4>
+<p><strong>Demographics:</strong></p>
+<ul>
+<li>Age: 18-45 years</li>
+<li>Tech-savvy individuals comfortable with mobile applications</li>
+<li>People interested in self-improvement and mental wellness</li>
+</ul>
+<p><strong>User Needs:</strong></p>
+<ul>
+<li>Simple and quick way to log daily emotions</li>
+<li>Understanding of emotional patterns without manual analysis</li>
+<li>Actionable suggestions to improve mood</li>
+<li>Visual representation of mood trends over time</li>
+<li>Option to seek professional help when needed</li>
+<li>Assurance that personal data is secure and private</li>
+</ul>
+<h4 id="counsellors-mental-health-professionals">2. Counsellors (Mental
+Health Professionals)</h4>
+<p><strong>Demographics:</strong></p>
+<ul>
+<li>Licensed mental health professionals, therapists, or
+counsellors</li>
+<li>Professionals seeking digital tools to extend their reach</li>
+</ul>
+<p><strong>User Needs:</strong></p>
+<ul>
+<li>Overview of client emotional patterns before sessions</li>
+<li>Efficient communication channel with clients</li>
+<li>Access to client mood history with proper consent</li>
+<li>Tools to track client progress over time</li>
+<li>Secure and confidential platform for professional communication</li>
+</ul>
+<h3 id="user-personas">User Personas</h3>
+<p><strong>Persona 1: Maya (General User)</strong></p>
+<ul>
+<li>28-year-old marketing professional</li>
+<li>Experiences work-related stress and anxiety</li>
+<li>Wants to understand her emotional triggers</li>
+<li>Prefers quick, daily check-ins over lengthy journaling</li>
+<li>Values data visualization and actionable insights</li>
+</ul>
+<p><strong>Persona 2: Dr. James (Counsellor)</strong></p>
+<ul>
+<li>42-year-old licensed therapist</li>
+<li>Manages multiple clients remotely</li>
+<li>Needs efficient tools to track client well-being between
+sessions</li>
+<li>Values secure communication and comprehensive mood summaries</li>
+<li>Wants to provide timely support to clients in need</li>
+</ul>
+<hr />
+<h2 id="overview-of-proposed-features">4. Overview of Proposed
+Features</h2>
+<h3 id="core-features">Core Features</h3>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>User Registration &amp; Authentication</strong></td>
+<td>Secure account creation and login using email/password with Firebase
+Authentication. Email verification and password strength validation
+included.</td>
+</tr>
+<tr>
+<td><strong>Daily Mood Journaling</strong></td>
+<td>Text-based mood entry system allowing users to document their
+feelings and experiences each day.</td>
+</tr>
+<tr>
+<td><strong>AI Mood Analysis</strong></td>
+<td>Automatic analysis of mood entries using OpenAI’s natural language
+processing to detect emotional states (happy, sad, anxious, angry,
+neutral, etc.) with confidence scores.</td>
+</tr>
+<tr>
+<td><strong>Personalized Recommendations</strong></td>
+<td>AI-generated tips, quotes, and suggestions tailored to the user’s
+detected emotional state. Includes fallback static recommendations when
+AI is unavailable.</td>
+</tr>
+<tr>
+<td><strong>Mood History &amp; Timeline</strong></td>
+<td>Chronological view of all mood entries with filtering by date range
+(week, month, custom). Pagination support for large datasets.</td>
+</tr>
+<tr>
+<td><strong>Mood Trend Visualization</strong></td>
+<td>Interactive charts displaying mood patterns over time, including
+line charts, bar charts, and mood calendars. Export and share
+functionality.</td>
+</tr>
+<tr>
+<td><strong>Counsellor Directory</strong></td>
+<td>Browse and select available counsellors for support. View counsellor
+profiles and availability status.</td>
+</tr>
+<tr>
+<td><strong>Support Request System</strong></td>
+<td>Create support requests to connect with counsellors. Track request
+status (pending, accepted, completed).</td>
+</tr>
+<tr>
+<td><strong>Real-Time Messaging</strong></td>
+<td>Secure chat functionality between users and counsellors with
+real-time updates, offline support, and message read status.</td>
+</tr>
+<tr>
+<td><strong>Counsellor Dashboard</strong></td>
+<td>Dedicated interface for counsellors to view assigned users, access
+mood summaries (with consent), and manage conversations.</td>
+</tr>
+<tr>
+<td><strong>Push Notifications</strong></td>
+<td>Firebase Cloud Messaging integration for alerts on new messages,
+counsellor responses, and reminders.</td>
+</tr>
+<tr>
+<td><strong>Role-Based Access Control</strong></td>
+<td>Differentiated access and functionality for Users and Counsellors
+with appropriate security rules.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="technical-architecture">Technical Architecture</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                    Flutter Application                       │
+│              (iOS / Android / Web)                           │
+├─────────────────────────────────────────────────────────────┤
+│                    Firebase Services                         │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │   Auth      │  │  Firestore  │  │  Cloud Functions    │  │
+│  │             │  │  (Database) │  │  (Node.js/TS)       │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │    FCM      │  │  Storage    │  │    Analytics        │  │
+│  │ (Messaging) │  │  (Files)    │  │    Crashlytics      │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+├─────────────────────────────────────────────────────────────┤
+│                    External Services                         │
+│  ┌─────────────────────────────────────────────────────────┐│
+│  │                    OpenAI API                           ││
+│  │         (Mood Analysis &amp; Recommendations)               ││
+│  └─────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────┘</code></pre>
+<hr />
+<h2 id="project-timeline-and-milestones">5. Project Timeline and
+Milestones</h2>
+<h3 id="phase-1-foundation-weeks-1-2-completed">Phase 1: Foundation
+(Weeks 1-2) ✅ COMPLETED</h3>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 63%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Tasks</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M1.1: Project Setup</strong></td>
+<td>Initialize Flutter project, configure Firebase, set up development
+environment</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>M1.2: Authentication System</strong></td>
+<td>Implement user registration, login, email verification, and session
+management</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>M1.3: User Roles &amp; Permissions</strong></td>
+<td>Define user roles, implement Firestore security rules, role-based UI
+navigation</td>
+<td>✅ Complete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-2-core-mood-tracking-weeks-3-4-completed">Phase 2: Core
+Mood Tracking (Weeks 3-4) ✅ COMPLETED</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 66%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Tasks</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M2.1: Mood Entry System</strong></td>
+<td>Design and implement mood entry UI, Firestore schema, data
+validation</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>M2.2: AI Integration</strong></td>
+<td>Set up Cloud Functions, integrate OpenAI API, implement mood
+analysis</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>M2.3: Recommendations Engine</strong></td>
+<td>Create mood-to-prompt mapping, generate personalized suggestions,
+implement fallbacks</td>
+<td>✅ Complete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-3-analytics-visualization-weeks-5-6-completed">Phase 3:
+Analytics &amp; Visualization (Weeks 5-6) ✅ COMPLETED</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 65%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Tasks</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M3.1: Mood History</strong></td>
+<td>Implement history view, date filtering, pagination, search
+functionality</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>M3.2: Trend Visualization</strong></td>
+<td>Integrate charting library, create visualizations, add interactive
+features</td>
+<td>✅ Complete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-4-counsellor-features-weeks-7-8-completed">Phase 4:
+Counsellor Features (Weeks 7-8) ✅ COMPLETED</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 65%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Tasks</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M4.1: Counsellor Contact</strong></td>
+<td>Implement counsellor listing, support request system, notification
+integration</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>M4.2: Counsellor Dashboard</strong></td>
+<td>Build dashboard UI, user assignment system, mood summary
+display</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>M4.3: Messaging System</strong></td>
+<td>Implement real-time chat, push notifications, message status
+tracking</td>
+<td>✅ Complete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="summary-timeline">Summary Timeline</h3>
+<pre><code>Week 1-2:   ████████████████████ Phase 1: Foundation         ✅
+Week 3-4:   ████████████████████ Phase 2: Core Mood Tracking ✅
+Week 5-6:   ████████████████████ Phase 3: Analytics          ✅
+Week 7-8:   ████████████████████ Phase 4: Counsellor Features✅</code></pre>
+<h3 id="key-deliverables">Key Deliverables</h3>
+<ol type="1">
+<li><strong>Fully functional cross-platform mobile application</strong>
+supporting iOS, Android, and Web</li>
+<li><strong>Secure authentication system</strong> with role-based access
+control</li>
+<li><strong>AI-powered mood analysis</strong> with personalized
+recommendations</li>
+<li><strong>Interactive mood visualization dashboard</strong> with
+historical trends</li>
+<li><strong>Integrated counsellor support system</strong> with real-time
+messaging</li>
+<li><strong>Comprehensive documentation</strong> including setup guides
+and API documentation</li>
+</ol>
+<hr />
+<h2 id="appendix">Appendix</h2>
+<h3 id="technology-stack-summary">Technology Stack Summary</h3>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frontend</td>
+<td>Flutter (Dart)</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Firebase (Authentication, Firestore, Cloud Functions, FCM)</td>
+</tr>
+<tr>
+<td>AI/ML</td>
+<td>OpenAI API</td>
+</tr>
+<tr>
+<td>State Management</td>
+<td>Provider/Riverpod</td>
+</tr>
+<tr>
+<td>Charts</td>
+<td>fl_chart / charts_flutter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://docs.flutter.dev/">Flutter Documentation</a></li>
+<li><a href="https://firebase.google.com/docs">Firebase
+Documentation</a></li>
+<li><a href="https://platform.openai.com/docs">OpenAI API
+Documentation</a></li>
+</ul>
+<hr />
+<p><em>Document Version: 1.0</em><br />
+<em>Last Updated: January 2026</em><br />
+<em>Project: MoodMate - AI-Powered Mental Wellness Companion</em></p>
+</body>
+</html>
